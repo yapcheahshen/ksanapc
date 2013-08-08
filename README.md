@@ -4,8 +4,10 @@ ksanapc
 A framework for offline PC application based on node-webkit, Backbone Aura, Twitter Bootstrap, and Yase
 
 ### Installation
-	create a new folder
+	create a new folder 
 	unzip the archive in that folder
+	( or git clone https://github.com/yapcheahshen/ksanapc.git )
+
 	npm install vows // if you need to run  yadb and yase test suite
 	npm install yadb
 	npm install yase
@@ -23,7 +25,7 @@ A framework for offline PC application based on node-webkit, Backbone Aura, Twit
 	default folder for ydb data file
 	
 ### ydb search sequence
-	* current folder  // not implement yet
+	* current folder  
 	* other folder    // for testing ydb
 	* ydb folder      // for public release ydb
 
