@@ -1,0 +1,23 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">YDB Navigator</div>
+<ul class="breadcrumb">
+  <% for (var i=0 ;i<parents.length;i++) { %>
+  	<% if (i==parents.length-1) { %>
+  	<li class="active"><%=parents[i]%></li>
+  	<% } else { %>
+  	<li><a href="#" ><%=parents[i]%></a></li>
+  <%}}%>
+</ul>
+<div class="list-group">
+  <% if (children)  for (var i=0;i<children.length;i++) { %>
+	<a class="list-group-item" data-node="<%=children[i].text%>">
+    <span class="label <%=children[i].extratype%>"><%=children[i].text%></span><%=children[i].value%>
+	<%if (children[i].childcount) {%>
+	<span class="badge"><%=children[i].childcount%></span>
+	<%}%>
+</a>
+<% if (i>256) { %>
+  <span class="list-group-item"><%=children.length-i%> more to be loaded</span>
+<%  break; } } %>
+</div>
+</div>
