@@ -42,7 +42,7 @@ requirejs(['jquery','underscore','backbone','requirelib','text',
 	if (!index) index='index'; // when user didn't type index.html
 	console.log('trying to load module:'+index);
 	//
-	requirejs([index],function(entry) {
+	define([index],function(entry) {
 			console.log('main module loaded',index);
     			if (entry && entry.initialize) entry.initialize();
   });
