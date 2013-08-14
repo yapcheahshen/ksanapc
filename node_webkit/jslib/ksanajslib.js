@@ -10,12 +10,13 @@ if(typeof String.prototype.trim !== 'function') { //IE sucks
 
 requirejs.config( {
       paths: {
+		jquery: './jquery',
 		underscore: './underscore',
 		backbone: './backbone',
-		jquery: './jquery',
+		backbone_epoxy: './backbone.epoxy',
 		requirelib:'./require',
 		text:'./requiretext',
-	      bootstrap:'./bootstrap',
+	      	bootstrap:'./bootstrap',
 		eventemitter:'./eventemitter2',
 		 aura:'./aura/aura',
 		base:'./aura/base',
@@ -25,17 +26,18 @@ requirejs.config( {
 		widgets:'./aura/ext/widgets',
 		mediator:'./aura/ext/mediator',
 		debug:'./aura/ext/debug', 
-		socketio:'../launcher/socket.io',
+		socketio:'./socket.io',
 	//	howler:'./howler',
 
       }
 });
 
 
-requirejs(['jquery','underscore','backbone','requirelib','bootstrap','socketio'
-,'text','eventemitter'
+requirejs(['jquery','underscore','backbone','requirelib','socketio'
+,'text','eventemitter','backbone_epoxy'
 ,'aura','debug','mediator','widgets'
 ],function() {
+	requirejs(['bootstrap']);
 	Backbone.$=$; // add this line , otherwise backbone.js is not working occasionally 2013/8/7
 	 		// this.$el = element instanceof Backbone.$ ? element : Backbone.$(element);
 	var href=window.location.href;
@@ -43,7 +45,7 @@ requirejs(['jquery','underscore','backbone','requirelib','bootstrap','socketio'
 	if (hash>0) href=href.substring(0,hash);
 	
 	var i=href.lastIndexOf('/');
-	
+	requirejs.config({baseUrl: href.substring(0,i)})
 	var index=href.substr(i+1);
 	index=index.replace('.html','');
 	index=index.replace('.htm','');

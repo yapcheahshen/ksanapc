@@ -18,6 +18,7 @@ define(function() {
         app.core.mvc    = Backbone;
         app.sandbox.mvc = Backbone;
         app.core.registerWidgetType('Backbone', Backbone.View.prototype);
+        app.core.registerWidgetType('Backbone.Epoxy', Backbone.Epoxy.View.prototype);
       },
       afterAppStart: function(app) {
       	  
