@@ -45,3 +45,7 @@ A framework for offline PC application based on node-webkit, Backbone Aura, Twit
 	cd node_server
 	node server
 	visit http://127.0.0.1:2555/ydbexplorer/
+	
+	
+### Online tutorial in Chinese
+	http://www.ksana.tw
