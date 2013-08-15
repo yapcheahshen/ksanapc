@@ -11,9 +11,10 @@ function(host) {
 	
 	exports.initialize=makeinf("initialize");
 	exports.phraseSearch=makeinf("phraseSearch");
-//	exports.gettext=makeinf("gettext");
+	exports.getText=makeinf("getText");
+	exports.fillText=makeinf("fillText");
+	exports.getRange=makeinf("getRange");
 //	exports.getpage=makeinf("getpage");
-//	exports.getrange=makeinf("getrange");
 //	exports.fuzzysearch=makeinf("fuzzysearch");
 	
 

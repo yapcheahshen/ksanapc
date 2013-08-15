@@ -1,0 +1,1 @@
+@node_webkit\node-webkit-v0.6.3-win-ia32\nw.exe %1

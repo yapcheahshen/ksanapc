@@ -32,8 +32,14 @@ A framework for offline PC application based on node-webkit, Backbone Aura, Twit
 	* other folder    // for testing ydb
 	* ydb folder      // for public release ydb
 
-### ydbexplorer
-	A sample application to explore the content of ydb
+### build-in sample
+	* ydbexplorer, A sample application to explore the content of ydb
+
+### other sample
+	* slotfilter, Yase sample
+		https://github.com/yapcheahshen/slotfilter
+### run with node-webkit
+	* On Windows : nw folder_name
 
 ### run on webserver
 	cd node_server
