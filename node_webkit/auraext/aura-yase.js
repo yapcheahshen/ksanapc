@@ -24,6 +24,8 @@ define(function() {
             getText: makeinf('getText'),
             fillText: makeinf('fillText'),
             getRange: makeinf('getRange'),
+            findTag: makeinf('findTag'),
+            version: app.sandbox.services["yase"].version
         };  
      } else {
         //for node_server , use socket.io to talk to server-side yase_api.js

@@ -14,9 +14,12 @@ function(host) {
 	exports.getText=makeinf("getText");
 	exports.fillText=makeinf("fillText");
 	exports.getRange=makeinf("getRange");
+	exports.findTag=makeinf("findTag");
 //	exports.getpage=makeinf("getpage");
 //	exports.fuzzysearch=makeinf("fuzzysearch");
-	
+	host.exec(function(err,data){
+		exports.version=data;
+	},0,"yase","version");
 
 	return exports;
 });

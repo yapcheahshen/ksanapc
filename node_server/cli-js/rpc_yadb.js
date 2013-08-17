@@ -16,5 +16,10 @@ function(host) {
 	exports.getRaw=makeinf("getRaw");
 	//exports.writeFile=writeFile;
 	exports.initialize=makeinf("initialize");
+	host.exec(function(err,data){
+		exports.version=data;
+	},0,"yadb","version");
+
+
 	return exports;
 });
