@@ -27,6 +27,9 @@ requirejs.config( {
 		mediator:'./aura/ext/mediator',
 		debug:'./aura/ext/debug', 
 		socketio:'./socket.io',
+		cjkutil:'./cjk/cjkutil',
+		strokecount:'./cjk/strokecount',
+		glyphemesearch:'./cjk/glyphemesearch',
 	//	howler:'./howler',
 
       }
@@ -35,7 +38,7 @@ requirejs.config( {
 
 requirejs(['jquery','underscore','backbone','requirelib','socketio'
 ,'text','eventemitter','backbone_epoxy'
-,'aura','debug','mediator','widgets'
+,'aura','debug','mediator','widgets','glyphemesearch'
 ],function() {
 	requirejs(['bootstrap']);
 	Backbone.$=$; // add this line , otherwise backbone.js is not working occasionally 2013/8/7
