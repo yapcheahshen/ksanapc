@@ -13,6 +13,8 @@ function(host) {
 	*/
 	
 	var exports={};
+	//TODO , create a cache object on client side to save network trafic on
+	//same getRaw
 	exports.getRaw=makeinf("getRaw");
 	//exports.writeFile=writeFile;
 	exports.initialize=makeinf("initialize");

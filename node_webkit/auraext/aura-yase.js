@@ -22,6 +22,8 @@ define(function() {
           app.sandbox.yase={ //turn into async, for compatible with node_server
             phraseSearch: makeinf('phraseSearch'),
             getText: makeinf('getText'),
+            getTextByTag: makeinf('getTextByTag'),
+            closestTag: makeinf('closestTag'),
             fillText: makeinf('fillText'),
             getRange: makeinf('getRange'),
             findTag: makeinf('findTag'),
