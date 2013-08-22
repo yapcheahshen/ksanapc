@@ -112,6 +112,7 @@
 				var stroke=strokecount(glypheme[0]) + remainstroke;
 				return moveexta(filterstroke(r,stroke));
 			}
+			r.unshift(cjkutil.getutf32({widestring:glypheme[0]}));
 			return  moveexta(r)||[];
 		}
 		glypheme.sort(); // 口木口木 ==> 口口木木
@@ -128,6 +129,9 @@
 			prev=glypheme[i];
   	 }
   	 var res=array_intersect.apply(null, arg);
+  	 for (var i=0;i<glypheme.length;i++) {
+  	 	res.unshift(cjkutil.getutf32({widestring:glypheme[i]}));
+  	 }
 	 if (remainstroke|| (numbers && numbers.length)) {
 		var stroke=partstroke + remainstroke;
 		return moveexta(filterstroke(res,stroke));	 
