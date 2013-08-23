@@ -26,6 +26,8 @@ define(function() {
             closestTag: makeinf('closestTag'),
             fillText: makeinf('fillText'),
             getRange: makeinf('getRange'),
+            getRaw: makeinf('getRaw'),
+            getBlob: makeinf('getBlob'),
             findTag: makeinf('findTag'),
             version: app.sandbox.services["yase"].version
         };  

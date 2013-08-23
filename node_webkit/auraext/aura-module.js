@@ -1,5 +1,7 @@
-define({
+define(['../jslib/base64'],function(Base64){
+	return {
   initialize: function(app) {
+  	app.sandbox.Base64=Base64;
 	app.sandbox.minversion=function(mod, ver) {
 		var m=app.sandbox[mod].version.match(/(\d*?)\.(\d*?)\.(\d*)/);
 		console.log('module version',mod,m)
@@ -10,4 +12,5 @@ define({
   },
   afterAppStart: function() {
   }
+}
 });

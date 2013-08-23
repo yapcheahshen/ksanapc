@@ -12,9 +12,14 @@ function(host) {
 	exports.initialize=makeinf("initialize");
 	exports.phraseSearch=makeinf("phraseSearch");
 	exports.getText=makeinf("getText");
+	exports.getTextByTag=makeinf("getTextByTag");
+	exports.closestTag=makeinf("closestTag");
+	
 	exports.fillText=makeinf("fillText");
 	exports.getRange=makeinf("getRange");
 	exports.findTag=makeinf("findTag");
+	exports.getRaw=makeinf("getRaw");
+	exports.getBlob=makeinf("getBlob");
 //	exports.getpage=makeinf("getpage");
 //	exports.fuzzysearch=makeinf("fuzzysearch");
 	host.exec(function(err,data){
