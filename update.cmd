@@ -1,3 +1,2 @@
 git pull origin master
-npm update yadb
-npm update yase
+npm update yadb yase
