@@ -46,10 +46,12 @@
     var a2 = null;
     var n = 1;
     var l,l2,jstart;
+    if (!a1 || !a1.length)return [];
     while(n < arguments.length) {
       a = [];
       a2 = arguments[n];
       l = a1.length;
+      if (!a2) return [];
       l2 = a2.length;
       jstart=0;
       for(var i=0; i<l; i++) {
