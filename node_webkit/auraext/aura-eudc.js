@@ -1,4 +1,4 @@
-define(['../jslib/base64'],function(Base64){
+define(['../jslib/base64','../jslib/kage/kage.amd'],function(Base64,Kage){
 	var imagearrive=function(nimg) {
 	  return function(err,data){
 	    if (data) { //convert to base64
@@ -28,6 +28,7 @@ return {
   initialize: function(app) {
   		app.sandbox.loadimages=loadimages;
   		app.sandbox.imagearrive=imagearrive;
+  		app.sandbox.kage=Kage;
   },
   afterAppStart: function() {
   }

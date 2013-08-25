@@ -29,6 +29,7 @@ define(function() {
             getRaw: makeinf('getRaw'),
             getBlob: makeinf('getBlob'),
             findTag: makeinf('findTag'),
+            customfunc: makeinf('customfunc'),
             version: app.sandbox.services["yase"].version
         };  
      } else {
