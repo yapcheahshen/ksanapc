@@ -62,7 +62,7 @@ var chwithstrokecount=function(n) {
 	return output;
 }
 var strokecount=function(ch) {
-	code=parseInt(ch);
+	code=parseInt(ch,10);
 	if ( isNaN(code)) {
 		var code=getutf32(ch);
 	}

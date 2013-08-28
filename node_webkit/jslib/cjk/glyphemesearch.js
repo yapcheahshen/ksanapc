@@ -97,7 +97,7 @@
        var opt={widestring:wh};
 	   var numbers=wh.match(/\d+/g);
 	   var remainstroke=0;
-	   for (var i in numbers) remainstroke+=parseInt(numbers[i]);
+	   for (var i in numbers) remainstroke+=parseInt(numbers[i],10);
 
        while (opt.widestring!=="") {
        	  var code=cjkutil.getutf32(opt);

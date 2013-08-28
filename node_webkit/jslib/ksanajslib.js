@@ -30,6 +30,7 @@ requirejs.config( {
 		cjkutil:'./cjk/cjkutil',
 		strokecount:'./cjk/strokecount',
 		glyphemesearch:'./cjk/glyphemesearch',
+		rangy:'./rangy/rangy-core'
 	//	howler:'./howler',
 
       }
@@ -38,7 +39,7 @@ requirejs.config( {
 
 requirejs(['jquery','underscore','backbone','requirelib','socketio'
 ,'text','eventemitter','backbone_epoxy'
-,'aura','debug','mediator','widgets','glyphemesearch'
+,'aura','debug','mediator','widgets','glyphemesearch','rangy'
 ],function() {
 	requirejs(['bootstrap']);
 	Backbone.$=$; // add this line , otherwise backbone.js is not working occasionally 2013/8/7

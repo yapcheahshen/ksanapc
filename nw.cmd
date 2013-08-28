@@ -1,1 +1,1 @@
-@start node_webkit\win-ia32\nw.exe %1
+@start node_webkit\win-ia32\nw.exe --remote-debugging-port=9222 %1
