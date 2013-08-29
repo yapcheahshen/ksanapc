@@ -24,7 +24,7 @@ function(host) {
 
 //	exports.getpage=makeinf("getpage");
 //	exports.fuzzysearch=makeinf("fuzzysearch");
-	exports.version='0.0.20'; //this is a quick hack
+	//exports.version='0.0.20'; //this is a quick hack
 	host.exec(function(err,data){
 		exports.version=data;
 	},0,"yase","version",{});

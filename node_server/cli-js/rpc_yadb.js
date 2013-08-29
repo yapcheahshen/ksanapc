@@ -18,7 +18,7 @@ function(host) {
 	exports.getRaw=makeinf("getRaw");
 	//exports.writeFile=writeFile;
 	exports.initialize=makeinf("initialize");
-	exports.version='0.0.13'; //this is a quick hack
+	//exports.version='0.0.13'; //this is a quick hack
 	host.exec(function(err,data){
 		console.log('version',err,data)
 		exports.version=data;

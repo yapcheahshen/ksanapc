@@ -18,7 +18,7 @@ define(function() {
               //this line is not really needed.
               setTimeout( function() { callback(0,data) }, 0);
           },
-          version: app.sandbox.services["yadb"].version
+          version: app.sandbox.services["yadb"].version()
         };  
      } else {
         //for node_server , use socket.io to talk to server-side yadb_api.js
