@@ -14,17 +14,20 @@ function(host) {
 	exports.getText=makeinf("getText");
 	exports.getTextByTag=makeinf("getTextByTag");
 	exports.closestTag=makeinf("closestTag");
+	exports.getTagAttr=makeinf("getTagAttr");
 	
 	exports.fillText=makeinf("fillText");
 	exports.getRange=makeinf("getRange");
 	exports.findTag=makeinf("findTag");
 	exports.getRaw=makeinf("getRaw");
 	exports.getBlob=makeinf("getBlob");
+
 //	exports.getpage=makeinf("getpage");
 //	exports.fuzzysearch=makeinf("fuzzysearch");
+	exports.version='0.0.20'; //this is a quick hack
 	host.exec(function(err,data){
 		exports.version=data;
-	},0,"yase","version");
+	},0,"yase","version",{});
 
 	return exports;
 });
