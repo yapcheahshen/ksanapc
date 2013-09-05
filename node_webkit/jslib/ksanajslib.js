@@ -24,6 +24,7 @@ requirejs.config( {
 		base:'./aura/base',
 		platform:'./aura/platform',
 		"aura.extensions":'./aura/aura.extensions',
+		auraextensions:'./aura/aura.extensions',
 
 		logger:'./aura/logger',
 		components:'./aura/ext/components',

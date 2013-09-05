@@ -1,6 +1,6 @@
 define([
   './base',
-  './aura.extensions',
+  './auraextensions',
   './logger'
   ], function(base, ExtManager, Logger) {
 
