@@ -45,6 +45,7 @@ requirejs(['jquery','underscore','backbone','requirelib','socketio'
 ,'aura','debug','mediator','widgets','glyphemesearch','rangy'
 ],function() {
 	requirejs(['bootstrap','bootbox']);
+	window.jQuery=$;
 	Backbone.$=$; // add this line , otherwise backbone.js is not working occasionally 2013/8/7
 	 		// this.$el = element instanceof Backbone.$ ? element : Backbone.$(element);
 	var href=window.location.href;
