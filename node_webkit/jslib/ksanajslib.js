@@ -19,7 +19,7 @@ requirejs.config( {
 	    bootstrap:'./bootstrap',
 	    bootbox:'./bootbox',
 		eventemitter:'./eventemitter2',
-		 aura:'./aura/aura',
+		aura:'./aura/aura',
 		base:'./aura/base',
 		platform:'./aura/platform',
 		extensions:'./aura/extensions',
@@ -32,6 +32,7 @@ requirejs.config( {
 		strokecount:'./cjk/strokecount',
 		glyphemesearch:'./cjk/glyphemesearch',
 		radicalvariants:'./cjk/radicalvariants',
+		pinyin:'./cjk/pinyin',
 		rangy:'./rangy/rangy-core'
 	//	howler:'./howler',
 
@@ -40,7 +41,7 @@ requirejs.config( {
 
 
 requirejs(['jquery','underscore','backbone','requirelib','socketio'
-,'text','eventemitter','backbone_epoxy','bootstrap','bootbox'
+,'text','eventemitter','backbone_epoxy','bootstrap','bootbox','pinyin'
 ,'aura','debug','mediator','widgets','glyphemesearch','rangy'
 ],function() {
 	requirejs(['bootstrap']);
