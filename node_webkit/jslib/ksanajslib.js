@@ -19,12 +19,14 @@ requirejs.config( {
 	    bootstrap:'./bootstrap',
 	    bootbox:'./bootbox',
 		eventemitter:'./eventemitter2',
+		
 		aura:'./aura/aura',
 		base:'./aura/base',
 		platform:'./aura/platform',
-		extensions:'./aura/extensions',
+		"aura.extensions":'./aura/aura.extensions',
+
 		logger:'./aura/logger',
-		widgets:'./aura/ext/widgets',
+		components:'./aura/ext/components',
 		mediator:'./aura/ext/mediator',
 		debug:'./aura/ext/debug', 
 		socketio:'./socket.io',
@@ -42,7 +44,7 @@ requirejs.config( {
 
 requirejs(['jquery','underscore','backbone','requirelib','socketio'
 ,'text','eventemitter','backbone_epoxy','pinyin'
-,'aura','debug','mediator','widgets','glyphemesearch','rangy'
+,'aura','debug','mediator','components','glyphemesearch','rangy'
 ],function() {
 	window.jQuery=$;
 	requirejs(['bootstrap','bootbox']);

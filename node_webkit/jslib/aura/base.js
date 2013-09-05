@@ -6,7 +6,7 @@
   } else {
     requirejs.config({
       paths: {
-        jquery:     'components/jquery/jquery'
+        jquery:     'bower_components/jquery/jquery'
       },
       shim: {
         jquery:     { exports: '$' }
@@ -21,7 +21,7 @@
   } else {
     requirejs.config({
       paths: {
-        underscore: 'components/underscore/underscore'
+        underscore: 'bower_components/underscore/underscore'
       },
       shim: {
         underscore: { exports: '_' }
