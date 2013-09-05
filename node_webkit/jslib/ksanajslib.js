@@ -31,6 +31,7 @@ requirejs.config( {
 		cjkutil:'./cjk/cjkutil',
 		strokecount:'./cjk/strokecount',
 		glyphemesearch:'./cjk/glyphemesearch',
+		radicalvariants:'./cjk/radicalvariants',
 		rangy:'./rangy/rangy-core'
 	//	howler:'./howler',
 

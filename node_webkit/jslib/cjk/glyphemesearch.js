@@ -1,4 +1,5 @@
-﻿define(['cjkutil','strokecount'], function(cjkutil,strokecount){
+﻿define(['cjkutil','strokecount','radicalvariants'], 
+	function(cjkutil,strokecount,radicalvariants){
 
   var str2arr=function(s) {
 		var output=[];
@@ -9,16 +10,22 @@
 		}
 		return output;
   }
-	
+  var expandvariant=function(part) {
+  	var v=radicalvariants[part];
+  	return v? str2arr(v) :[] ;
+  }
   var getderived=function( opt ) {
 	  var r=opt.map[opt.widestring];
-	  if (typeof r=="string") {
-		return  str2arr(r);
-	  }	else {
-		 var ic=cjkutil.getutf32(opt);
-		return opt.map[ic.toString()]; //old format
+	  var v=expandvariant(opt.widestring);
+	  var out=str2arr(r) || [];
+	  
+	  if (v.length) {
+	  	for (var i in v) {
+	  		var c=cjkutil.ucs2string(v[i]);
+	  		out=out.concat( str2arr(opt.map[c]) );
+	  	}
 	  }
-  
+	  return out.sort(function(a,b){return a-b});
   }
   
   
@@ -142,6 +149,7 @@
   }
   //export for testing
   gsearch.remove_once=remove_once;
+  gsearch.str2arr=str2arr;
   gsearch.array_unique=array_unique;
   gsearch.array_intersect=array_intersect;
   gsearch.withstroke=strokecount.withstroke;
