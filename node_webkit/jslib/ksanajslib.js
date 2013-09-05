@@ -41,7 +41,7 @@ requirejs.config( {
 
 
 requirejs(['jquery','underscore','backbone','requirelib','socketio'
-,'text','eventemitter','backbone_epoxy','bootstrap','pinyin'
+,'text','eventemitter','backbone_epoxy','pinyin'
 ,'aura','debug','mediator','widgets','glyphemesearch','rangy'
 ],function() {
 	window.jQuery=$;
