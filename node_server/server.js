@@ -131,6 +131,7 @@ var startserver=function() {
 
 process.on('uncaughtException', function(err) {
   console.log(err);
+  rpc_node.finalize();
 });
 
 startserver();

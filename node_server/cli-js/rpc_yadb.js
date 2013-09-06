@@ -16,6 +16,7 @@ function(host) {
 	//TODO , create a cache object on client side to save network trafic on
 	//same getRaw
 	exports.getRaw=makeinf("getRaw");
+	exports.closeAll=makeinf("closeAll");
 	//exports.writeFile=writeFile;
 	exports.initialize=makeinf("initialize");
 	//exports.version='0.0.13'; //this is a quick hack

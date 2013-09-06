@@ -50,7 +50,9 @@ var callfromclient =function(client,frombrowser) {
 	else result.success=false;
 };
 
-
+var finalize=function() {
+	if (API['yadb']) API['yadb'].closeAll();
+}
 
 var rpc_init=function(server) {
 	var io=require('socket.io').listen(server);
@@ -67,4 +69,5 @@ var rpc_init=function(server) {
 		
 var services=require('./services');
 services(API); 
+rpc_init.finalize=finalize;
 module.exports=rpc_init;
