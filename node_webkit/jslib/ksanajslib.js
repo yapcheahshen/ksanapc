@@ -36,7 +36,9 @@ requirejs.config( {
 		glyphemesearch:'./cjk/glyphemesearch',
 		radicalvariants:'./cjk/radicalvariants',
 		pinyin:'./cjk/pinyin',
-		rangy:'./rangy/rangy-core'
+		rangy:'./rangy/rangy-core',
+
+		aem:'./refinery/aem'
 	//	howler:'./howler',
 
       }
@@ -44,7 +46,7 @@ requirejs.config( {
 
 
 requirejs(['jquery','underscore','backbone','requirelib','socketio'
-,'text','eventemitter','backbone_epoxy','pinyin'
+,'text','eventemitter','backbone_epoxy','pinyin','aem'
 ,'aura','debug','mediator','components','glyphemesearch','rangy'
 ],function() {
 	window.jQuery=$;
