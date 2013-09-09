@@ -19,7 +19,7 @@ define(function() {
         var api_yase=require('yase').api ; 
         if (!app.sandbox.services) app.sandbox.services={};
         api_yase(app.sandbox.services); //install api into services
-          app.sandbox.yase={ //turn into async, for compatible with node_server
+        app.sandbox.yase={ //turn into async, for compatible with node_server
             phraseSearch: makeinf('phraseSearch'),
             getText: makeinf('getText'),
             getTextByTag: makeinf('getTextByTag'),
