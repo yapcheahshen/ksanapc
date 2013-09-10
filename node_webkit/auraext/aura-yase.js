@@ -23,6 +23,7 @@ define(function() {
             phraseSearch: makeinf('phraseSearch'),
             getText: makeinf('getText'),
             getTextByTag: makeinf('getTextByTag'),
+            getTagInRange: makeinf('getTagInRange'),
             closestTag: makeinf('closestTag'),
             getTagAttr: makeinf('getTagAttr'),
             fillText: makeinf('fillText'),
