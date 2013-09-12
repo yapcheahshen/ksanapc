@@ -1,4 +1,4 @@
-﻿define(['cjkutil','strokecount','radicalvariants'], 
+﻿define(['./cjkutil','./strokecount','./radicalvariants'], 
 	function(cjkutil,strokecount,radicalvariants){
 
   var str2arr=function(s) {

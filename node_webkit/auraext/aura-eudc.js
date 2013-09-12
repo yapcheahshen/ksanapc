@@ -1,4 +1,5 @@
-define(['../jslib/base64','../jslib/kage/kage.amd'],function(Base64,Kage){
+define(['../jslib/base64','../jslib/kage/kage.amd','../jslib/cjk/dgg'],
+	function(Base64,Kage,dgg){
 	var imagearrive=function(nimg) {
 	  return function(err,data){
 	    if (data) { //convert to base64

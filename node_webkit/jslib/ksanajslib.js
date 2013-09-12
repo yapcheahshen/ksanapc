@@ -19,7 +19,8 @@ requirejs.config( {
 	    bootstrap:'./bootstrap',
 	    bootbox:'./bootbox',
 		eventemitter:'./eventemitter2',
-		
+		socketio:'./socket.io',
+		//aura
 		aura:'./aura/aura',
 		base:'./aura/base',
 		platform:'./aura/platform',
@@ -30,15 +31,17 @@ requirejs.config( {
 		components:'./aura/ext/components',
 		mediator:'./aura/ext/mediator',
 		debug:'./aura/ext/debug', 
-		socketio:'./socket.io',
-		cjkutil:'./cjk/cjkutil',
-		strokecount:'./cjk/strokecount',
-		glyphemesearch:'./cjk/glyphemesearch',
-		radicalvariants:'./cjk/radicalvariants',
-		pinyin:'./cjk/pinyin',
-		rangy:'./rangy/rangy-core',
 
-		aem:'./refinery/aem'
+
+		
+//		cjkutil:'./cjk/cjkutil',
+//		strokecount:'./cjk/strokecount',
+//		glyphemesearch:'./cjk/glyphemesearch',
+//		radicalvariants:'./cjk/radicalvariants',
+//		pinyin:'./cjk/pinyin',
+//		rangy:'./rangy/rangy-core',
+
+//		aem:'./refinery/aem'
 	//	howler:'./howler',
 
       }
@@ -46,12 +49,11 @@ requirejs.config( {
 
 
 requirejs(['jquery','underscore','backbone','requirelib','socketio'
-,'text','eventemitter','backbone_epoxy','pinyin','aem'
-,'aura','debug','mediator','components','glyphemesearch','rangy'
+,'text','eventemitter','backbone_epoxy','aura','debug','mediator','components'
 ],function() {
 	window.jQuery=$;
 	requirejs(['bootstrap','bootbox']);
-	Backbone.$=$; // add this line , otherwise backbone.js is not working occasionally 2013/8/7
+	Backbone.$=$; // backbone.js is not working occasionally 2013/8/7
 	 		// this.$el = element instanceof Backbone.$ ? element : Backbone.$(element);
 	var href=window.location.href;
 	var hash=href.lastIndexOf('#');
