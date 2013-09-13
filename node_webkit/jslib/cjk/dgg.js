@@ -1,24 +1,29 @@
+/*
+base on 
+KAGE Kanji-glyph Automatic Generating Engine
+http://fonts.jp/kage/
+*/
+
 define(['./cjkutil','../base64','../kage/kage.amd'],function(cjkutil,Base64,kage) {
     var isCJK =function(c) {return ((c>=0x3000 && c<=0x9FFF) 
 	|| (c>=0xD800 && c<0xDFFF) || (c>=0x2FF0 && c<0x2FFF) || (c>=0xFF00) ) ;}	
 
-	//run in widget context
-    var fetchglyph=function(title,$glyph,callback) {
+    var fetchglyphwiki=function(title,$glyph,callback) {
       var opts={db:'glyphwiki',name:'getBuhins',params:[title]};
       var that=this;
-      if (!this.fontcache) this.fontcache={};
+      
       this.sandbox.yase.customfunc(opts,function(err,data){
         var buhins=Object.keys(data);
         for (var i in data) {
-          if (!that.fontcache[i]) that.fontcache[i]=data[i];
+        	//save some network traffic
+          if (!that.sandbox.kagecache[i]) that.sandbox.kagecache[i]=data[i];
         }
         callback(data,title,$glyph);
-          //that.$el.html(JSON.stringify(data));
       })
     };
 
-	var loadglyphs=function($el) {
-		var glyphs=$el.find("img.glyphwiki");
+	var loadglyphs=function($el,selector) {
+		var glyphs=$el.find(selector || "img.glyphwiki");
 		var that=this;
 		var kage=new this.sandbox.kage.Kage();
 		for (var i=0;i<glyphs.length;i++) {
@@ -26,18 +31,21 @@ define(['./cjkutil','../base64','../kage/kage.amd'],function(cjkutil,Base64,kage
 			var src=glyphs[i].attributes["src"].value;
 			if (src) continue;//already has src data
 			var glyphid='u'+ cjkutil.getutf32ch(title).toString(16);
-			fetchglyph.apply(this,[glyphid,glyphs[i],function(buhins,glyphid,glyph){
-		      var polygons=new that.sandbox.kage.Polygons();
-		      for (var i in buhins) {
-		        kage.kBuhin.push( i, buhins[i]) ;
-		      }
-		      kage.makeGlyph(polygons, glyphid);
-		      var svg=polygons.generateSVG();
-		      var widthbefore=$(glyph).css('height');
-		      glyph.src="data:image/svg+xml;utf8,"+svg;
-		      $(glyph).css("width",widthbefore);
-		      $(glyph).css("height",widthbefore);
-			}]);
+			fetchglyphwiki.apply(this,[glyphid,glyphs[i],
+				function(buhins,glyphid,glyph){
+			      var polygons=new that.sandbox.kage.Polygons();
+			      for (var i in buhins) {
+			        kage.kBuhin.push( i, buhins[i]) ;
+			      }
+			      kage.makeGlyph(polygons, glyphid);
+			      var svg=polygons.generateSVG();
+			      var $g=$(glyph);
+			      var heightbefore=$g.css('height');
+			      glyph.src="data:image/svg+xml;utf8,"+svg;
+			      $g.css("width",heightbefore);
+			      $g.css("height",heightbefore);
+				}
+			]);
 		}
 	}
     var tagify=function(text,opts) {
@@ -46,14 +54,13 @@ define(['./cjkutil','../base64','../kage/kage.amd'],function(cjkutil,Base64,kage
 	  	var i=0,code=0;
 	  	var out="";
 	  	var addtoken=function(j) {
+	  		var sur=0;
 	  		var code2=text.charCodeAt(j+1);
 	  		if (code2>=0xDC00&&code2<=0xDFFF) {
-	  			var sur= 0x10000+(code &0x3ff)*1024 + (code2&0x3ff) ;
+	  			sur= 0x10000+(code &0x3ff)*1024 + (code2&0x3ff) ;
 	  		}
 	  		if (sur>=opts.codestart) {
 	  			var s=text[j]+text[j+1];
-	  			//var data="";
-	  			//var dataurl= "data:image/png;base64,"+Base64.encode(data);
 	  			out+='<IMG class="glyphwiki" src="" title="'+s+'"/>';
  	  		} else {
  	  			if (sur) out+=text[j]+text[j+1];
@@ -96,8 +103,7 @@ define(['./cjkutil','../base64','../kage/kage.amd'],function(cjkutil,Base64,kage
 	  	return out;
     }
   var api={};
-  api.tagify=tagify;
-  //api.fetchglyph=fetchglyph;
-  api.loadglyphs=loadglyphs;
+  api.tagify=tagify; //enclose extension char and IDS with <img>
+  api.loadglyphs=loadglyphs; // generate SVG and insert into img src
   return api;
 });

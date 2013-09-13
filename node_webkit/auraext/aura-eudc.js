@@ -30,6 +30,7 @@ return {
   		app.sandbox.loadimages=loadimages;
   		app.sandbox.imagearrive=imagearrive;
   		app.sandbox.kage=Kage;
+  		app.sandbox.kagecache={}; 
   },
   afterAppStart: function() {
   }
