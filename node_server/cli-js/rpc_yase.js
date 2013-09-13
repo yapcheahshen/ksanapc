@@ -22,6 +22,9 @@ function(host) {
 	exports.findTag=makeinf("findTag");
 	exports.getRaw=makeinf("getRaw");
 	exports.getBlob=makeinf("getBlob");
+	exports.customfunc=makeinf("customfunc");
+	exports.getTagInRange=makeinf("getTagInRange");
+	
 
 //	exports.getpage=makeinf("getpage");
 //	exports.fuzzysearch=makeinf("fuzzysearch");
