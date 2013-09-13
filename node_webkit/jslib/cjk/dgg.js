@@ -40,10 +40,10 @@ define(['./cjkutil','../base64','../kage/kage.amd'],function(cjkutil,Base64,kage
 			      kage.makeGlyph(polygons, glyphid);
 			      var svg=polygons.generateSVG();
 			      var $g=$(glyph);
-			      var heightbefore=$g.css('height');
+			      var widthbefore=$g.css('width');
 			      glyph.src="data:image/svg+xml;utf8,"+svg;
-			      $g.css("width",heightbefore);
-			      $g.css("height",heightbefore);
+			      $g.css("width",widthbefore);
+			      $g.css("height",widthbefore);
 				}
 			]);
 		}
