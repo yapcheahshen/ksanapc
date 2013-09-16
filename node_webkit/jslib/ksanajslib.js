@@ -41,14 +41,14 @@ requirejs.config( {
 //		pinyin:'./cjk/pinyin',
 //		rangy:'./rangy/rangy-core',
 
-//		aem:'./refinery/aem'
+		aem:'./refinery/aem'
 	//	howler:'./howler',
 
       }
 });
 
 
-requirejs(['jquery','underscore','backbone','requirelib','socketio'
+requirejs(['jquery','underscore','backbone','requirelib','socketio','aem'
 ,'text','eventemitter','backbone_epoxy','aura','debug','mediator','components'
 ],function() {
 	window.jQuery=$;
