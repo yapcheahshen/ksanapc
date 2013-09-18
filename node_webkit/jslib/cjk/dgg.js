@@ -52,14 +52,14 @@ define(['./cjkutil','../base64','../kage/kage.amd'],function(cjkutil,Base64,kage
 	 	opts=opts||{};
 	 	opts.codestart=opts.codestart||0x20000  //0x2A700
 	  	var i=0,code=0;
-	  	var out="";
+	  	var out="",intag=false;
 	  	var addtoken=function(j) {
 	  		var sur=0;
 	  		var code2=text.charCodeAt(j+1);
 	  		if (code2>=0xDC00&&code2<=0xDFFF) {
 	  			sur= 0x10000+(code &0x3ff)*1024 + (code2&0x3ff) ;
 	  		}
-	  		if (sur>=opts.codestart) {
+	  		if (sur>=opts.codestart && !intag) {
 	  			var s=text[j]+text[j+1];
 	  			out+='<IMG class="glyphwiki" src="" title="'+s+'"/>';
  	  		} else {
@@ -96,8 +96,12 @@ define(['./cjkutil','../base64','../kage/kage.amd'],function(cjkutil,Base64,kage
 					i++;
 				}
 			} else {
+				if (text[i]=='<') {
+					intag=true;
+				}
 				out+=text[i];
 				i++;
+				if (text[i]=='>') intag=false;
 			}
 	  	}
 	  	return out;

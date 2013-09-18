@@ -74,7 +74,8 @@ define(['underscore','text!./nav.tmpl','backbone'],
       this.parents=path;
       var patharr=JSON.parse(JSON.stringify(path));
       patharr.unshift('YDB');
-      $(this.el).html( _.template(template, {children:this.toc,parents:patharr}));
+      var size=0;
+      $(this.el).html( _.template(template, {children:this.toc,parents:patharr,size:size}));
       this.router.navigate(path.join('/'));
     },
     pathchange:function() {
@@ -88,7 +89,7 @@ define(['underscore','text!./nav.tmpl','backbone'],
       this.model.on("change:path",this.pathchange,this);
       var that=this;
       this.router = new Backbone.Router();
-      this.html(_.template(template,{parents:{},children:{}}) );
+      this.html(_.template(template,{parents:{},children:{},size:0}) );
       this.router.route("*path","setpath",function(path) {
         that.model.set({"path":path});
       });
