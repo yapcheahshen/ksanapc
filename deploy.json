@@ -1,0 +1,25 @@
+{
+	"files":[
+		"node_server",
+		"node_webkit/jslib",
+		"node_webkit/css",
+		"node_webkit/auraext",
+		"node_modules/yadb",
+		"node_modules/yase",
+		"ydbexplorer",
+		"LICENSE",
+		"README.md"
+	],
+	"osx" :[
+		"node_webkit/osx-ia32",
+		"update.command"
+	],
+	"linux" :[
+		"node_webkit/linux-ia32"
+	],
+	"win32" :[
+		"node_webkit/win-ia32",
+		"update.cmd",
+		"nw.cmd"
+	]
+}
