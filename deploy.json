@@ -19,7 +19,6 @@
 	],
 	"win32" :[
 		"node_webkit/win-ia32",
-		"update.cmd",
 		"nw.cmd"
 	]
 }

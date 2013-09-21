@@ -3,7 +3,7 @@ var argv=process.argv;
 var app=argv;
 app.shift();app.shift();
 var date =new Date().toISOString().substring(0,10);
-var zipname=(app[0]||'ksanapc') +'-'+date+'.zip';
+var zipname=(app[0]||'ksanapc') +'-'+process.platform+'-'+date+'.zip';
 
 var ZipWriter = require("./zipwriter").ZipWriter;
 var zip = new ZipWriter();
@@ -45,10 +45,6 @@ var addapp=function(deploy) {
 	addtozip(deploy[process.platform]);
 }
 
-//var AdmZip = new require('adm-zip');
-//var zip=new AdmZip();
-
-
 addapp(require('./deploy.json')); // ksanapc
 
 for (var i in app) {
@@ -56,7 +52,6 @@ for (var i in app) {
 	addapp(deploy);
 }
 
-//zip.writeZip(zipname);
 console.log('SAVING.....')
 zip.saveAs(zipname,function() {
    console.log("zip written.");
