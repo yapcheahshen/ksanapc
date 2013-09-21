@@ -14,14 +14,20 @@ var walk = function(dir) {
     list.forEach(function(file) {
         file = dir + '/' + file
         var stat = fs.statSync(file)
-        if (stat && stat.isDirectory()) results = results.concat(walk(file))
+        if (stat && stat.isDirectory()) {
+			if (file.substring(file.length-4)!='test') {
+				results = results.concat(walk(file))
+			} else {
+				console.log('skip '+file)
+			}
+        } 
         else results.push(file)
     })
     return results
 }
 var addfile=function(f) {
 	if (f.indexOf(".git")>-1 || f.indexOf(".bak")>-1) return;
-	console.log('adding',f);
+	console.log('add ',f);
 	zip.addFile(f,f);
 }
 var addtozip=function(files) {
@@ -54,7 +60,7 @@ for (var i in app) {
 
 console.log('SAVING.....')
 zip.saveAs(zipname,function() {
-   console.log("zip written.");
+   console.log("zip file created: "+zipname);
 });
 
 
