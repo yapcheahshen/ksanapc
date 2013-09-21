@@ -3,7 +3,14 @@ var argv=process.argv;
 var app=argv;
 app.shift();app.shift();
 var date =new Date().toISOString().substring(0,10);
-var zipname=(app[0]||'ksanapc') +'-'+process.platform+'-'+date+'.zip';
+var appname=(app[0]||'ksanapc');
+var zipname=appname +'-'+process.platform+'-'+date+'.zip';
+var shellscript={
+	'win32':'.cmd',
+	'osx':'.command',
+	'linux':'.sh'
+}
+var shellscriptname='start-'+appname + shellscript[process.platform];
 
 var ZipWriter = require("./zipwriter").ZipWriter;
 var zip = new ZipWriter();
@@ -26,7 +33,10 @@ var walk = function(dir) {
     return results
 }
 var addfile=function(f) {
-	if (f.indexOf(".git")>-1 || f.indexOf(".bak")>-1) return;
+	if (f.indexOf(".git")>-1 || f.indexOf(".bak")>-1  || f.indexOf(".log")>-1) {
+//		console.log('skip',f);
+		return;
+	}
 	console.log('add ',f);
 	zip.addFile(f,f);
 }
@@ -53,14 +63,32 @@ var addapp=function(deploy) {
 
 addapp(require('./deploy.json')); // ksanapc
 
+var addscriptscript=function() {
+	var script=[], P=process.platform;
+	if ('win32'==P) {
+		script.push('start node_webkit\\win-ia32\\nw.exe --remote-debugging-port=9222 '+appname);
+	} else if ('osx'==P) {
+		script.push('node_webkit/osx-ia32/node-webkit.app/Contents/MacOS/node-webkit --remote-debugging-port=9222 '+appname);
+	} else if ('linux'==P) {
+		script.push('node_webkit/linux-ia32/nw --remote-debugging-port=9222 '+appname);
+	} else throw 'unsupport platform';
+
+	fs.writeFileSync(shellscriptname,script.join(require('os').EOL),'ascii');
+	zip.addFile(shellscriptname,shellscriptname);
+}
+
+if (appname!='ksanapc') addscriptscript();
 for (var i in app) {
 	var deploy=require('./'+app[i]+'/deploy.json');
 	addapp(deploy);
 }
-
+//create 
 console.log('SAVING.....')
 zip.saveAs(zipname,function() {
    console.log("zip file created: "+zipname);
+   if (fs.existsSync(shellscriptname)) {
+   		fs.unlink(shellscriptname);
+   }
 });
 
 

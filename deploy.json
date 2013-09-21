@@ -11,14 +11,12 @@
 		"README.md"
 	],
 	"osx" :[
-		"node_webkit/osx-ia32",
-		"update.command"
+		"node_webkit/osx-ia32"
 	],
 	"linux" :[
 		"node_webkit/linux-ia32"
 	],
 	"win32" :[
-		"node_webkit/win-ia32",
-		"nw.cmd"
+		"node_webkit/win-ia32"
 	]
 }
