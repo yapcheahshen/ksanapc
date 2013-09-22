@@ -7,7 +7,7 @@ var appname=(app[0]||'ksanapc');
 var zipname=appname +'-'+process.platform+'-'+date+'.zip';
 var shellscript={
 	'win32':'.cmd',
-	'osx':'.command',
+	'darwin':'.command',
 	'linux':'.sh'
 }
 var shellscriptname='start-'+appname + shellscript[process.platform];
@@ -67,7 +67,7 @@ var addscriptscript=function() {
 	var script=[], P=process.platform;
 	if ('win32'==P) {
 		script.push('start node_webkit\\win-ia32\\nw.exe --remote-debugging-port=9222 '+appname);
-	} else if ('osx'==P) {
+	} else if ('darwin'==P) {
 		script.push('node_webkit/osx-ia32/node-webkit.app/Contents/MacOS/node-webkit --remote-debugging-port=9222 '+appname);
 	} else if ('linux'==P) {
 		script.push('node_webkit/linux-ia32/nw --remote-debugging-port=9222 '+appname);
