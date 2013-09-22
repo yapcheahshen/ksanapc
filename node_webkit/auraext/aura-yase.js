@@ -25,6 +25,7 @@ define(function() {
             getTextByTag: makeinf('getTextByTag'),
             getTagInRange: makeinf('getTagInRange'),
             closestTag: makeinf('closestTag'),
+            buildToc: makeinf('buildToc'),
             getTagAttr: makeinf('getTagAttr'),
             fillText: makeinf('fillText'),
             getRange: makeinf('getRange'),

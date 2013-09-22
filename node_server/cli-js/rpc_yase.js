@@ -16,6 +16,7 @@ function(host) {
 	exports.closestTag=makeinf("closestTag");
 	exports.getTagAttr=makeinf("getTagAttr");
 	exports.getTagInRange=makeinf("getTagInRange");
+	exports.buildToc=makeinf("buildToc");
 	
 	exports.fillText=makeinf("fillText");
 	exports.getRange=makeinf("getRange");

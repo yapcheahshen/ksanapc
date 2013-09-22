@@ -71,7 +71,7 @@ var addscriptscript=function() {
 		script.push('node_webkit/osx-ia32/node-webkit.app/Contents/MacOS/node-webkit --remote-debugging-port=9222 '+appname);
 	} else if ('linux'==P) {
 		script.push('node_webkit/linux-ia32/nw --remote-debugging-port=9222 '+appname);
-	} else throw 'unsupport platform';
+	} else throw 'unsupported platform';
 
 	fs.writeFileSync(shellscriptname,script.join(require('os').EOL),'ascii');
 	zip.addFile(shellscriptname,shellscriptname);
