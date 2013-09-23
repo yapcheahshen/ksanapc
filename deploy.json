@@ -10,7 +10,7 @@
 		"LICENSE",
 		"README.md"
 	],
-	"osx" :[
+	"darwin" :[
 		"node_webkit/osx-ia32"
 	],
 	"linux" :[
