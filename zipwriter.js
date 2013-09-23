@@ -193,12 +193,17 @@ function ZipWriter() {
 			append(fileName);
 			append(entry.extra);
 			append(entry.data);
-
 			entry.mtime = mtime;
 			entry.mdate = mdate;
 			entry.eattr = entry.isFile ? 0x00000020 : 0x00000030;
-		});
+/* yap 2013/9/23 */
 
+			if (fileName.substring(fileName.length-3)==='.sh'||
+				fileName.substring(fileName.length-8)==='.command') {
+				entry.eattr |=  (0x775 << 16);
+				console.log(fileName,'is a shell script, set to mode 775');
+			}
+		});
 		var startOffset = buffer.length;
 		var centralDirSize = 0;
 
