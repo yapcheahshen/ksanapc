@@ -8,3 +8,7 @@
 	background-repeat: no-repeat;
 	background-size:100%;
 }
+
+book {font-size:200%;}
+chapter {font-size:150%;}
+section {font-size:120%;color:brown;}

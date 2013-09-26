@@ -1,8 +1,13 @@
+/*
+   copy files from %scaffold% to newly created git repo
+   replace %scaffold% to appname
+*/
 var fs=require('fs');
 var argv=process.argv;
 var app=argv;
 app.shift();app.shift();
 var appname=app[0];
+var forcecreate=app.length>1 &&app[1]=='-f';
 var path=require('path');
 var getgiturl=function() {
 	var url=fs.readFileSync(appname+'/.git/config','utf8');//.match(/url = (.*?)\n/);
@@ -15,13 +20,15 @@ var die=function() {
 	process.exit(1);
 }
 
-if (!appname) die('node initapp newappname');
+if (!appname) die('node scaffold newappname');
 if (!fs.existsSync(appname)) die('folder not exists');
-if (!fs.existsSync(appname+'/.git')) die('not a git repo');
+if (!fs.existsSync(appname+'/.git')) die('not a git repository');
 
 
 var giturl=getgiturl();
-//if (fs.existsSync(appname+'/package.json')) die(giturl,'is not a brand new repo');
+if (!forcecreate && fs.existsSync(appname+'/package.json')) {
+	die(giturl,'is not a brand new repo, add -f at the end to force create, all files will be overwrite');
+}
 
 var walk = function(dir) {
     var results = []
@@ -40,27 +47,23 @@ var walk = function(dir) {
     })
     return results
 }
-fs.mkdirParent = function(dirPath, mode, callback) {
-  //Call the standard fs.mkdir
+var mkdirParent = function(dirPath, mode, callback) {
   fs.mkdir(dirPath, mode, function(error) {
-    //When it fail in this way, do the custom steps
     if (error && error.errno === 34) {
-      //Create all the parents recursively
-      fs.mkdirParent(path.dirname(dirPath), mode, callback);
-      //And then the directory
-      fs.mkdirParent(dirPath, mode, callback);
+      mkdirParent(path.dirname(dirPath), mode, callback);
+      mkdirParent(dirPath, mode, callback);
     }
-    //Manually run the callback since we used our own callback to do all these
     callback && callback(error);
   });
 };
-var textext=['.js','.json','.html','.css','.command','.cmd','.sh'];
+
+var textext=['.xml','.js','.json','.html','.css','.command','.cmd','.sh','.lst'];
 var replaceid=function(source) {
 	var raw=fs.readFileSync(source);
 	var ext=source.substring(source.lastIndexOf('.'));
 	
 	if (textext.indexOf(ext)==-1) {
-		console.log('skip non text file',source)
+		//console.log('skip non text file',source)
 		return raw;
 	}
 	var raw=fs.readFileSync(source,'utf8');
@@ -84,9 +87,9 @@ var copyfile=function(source) {
 		targetpath=path.dirname(target);
 	}	
 	
-	fs.mkdirParent(targetpath,function(err){
+	mkdirParent(targetpath,function(err){
 	 		if (stats.isDirectory()) return;
-	 		console.log('copying',target)
+	 		console.log('create',target)
 			fs.writeFileSync(target,arr,'utf8');	
 	});
 	
