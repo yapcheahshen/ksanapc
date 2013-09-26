@@ -9,10 +9,11 @@ create a new folder
 unzip the archive in that folder
 ( or git clone https://github.com/yapcheahshen/ksanapc.git )
 
-	npm install vows // if you need to run  yadb and yase test suite
+	npm install yadb yase refinery
+
+to run as server mode
+
 	npm install socket.io
-	npm install yadb
-	npm install yase
 
 install node-webkit in node_webkit subfolder
 
@@ -40,7 +41,9 @@ default folder for ydb data file
 ### other sample
  slotfilter, Yase sample,  https://github.com/yapcheahshen/slotfilter
 ### run with node-webkit
- On Windows : nw folder_name
+ 	cd slotfilter
+ 	run
+ 	
 
 ### run on webserver
 	cd node_server
@@ -49,4 +52,16 @@ default folder for ydb data file
 	
 	
 ### Online tutorial in Chinese
-http://www.ksana.tw
+http://www.ksana.tw/ksanapc
+
+### deploying
+	node makezip [appname]
+create a zip for deploying, including node-webkit runtime, which could be run on PC without git and node.js pre-installed.
+
+### scaffolding
+create a repo on github, and clone onto ksanapc folder,
+for example: https://github.com/user/myrepo
+
+	node scaffold myrepo
+
+scaffold.js will copy files from %scaffold% and replace id string inside the files.
