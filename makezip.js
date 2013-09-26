@@ -1,3 +1,6 @@
+/*
+	create stand-alone deployable zip, without any dependency.
+*/
 var fs=require('fs');
 var argv=process.argv;
 var app=argv;
@@ -14,7 +17,7 @@ var shellscriptname='start-'+appname + shellscript[process.platform];
 
 var ZipWriter = require("./zipwriter").ZipWriter;
 var zip = new ZipWriter();
-
+var starttime=new Date();
 var walk = function(dir) {
     var results = []
     var list = fs.readdirSync(dir)
@@ -63,7 +66,7 @@ var addapp=function(deploy) {
 
 addapp(require('./deploy.json')); // ksanapc
 
-var addscriptscript=function() {
+var addshellscript=function() {
 	var script=[], P=process.platform;
 	if ('win32'==P) {
 		script.push('start node_webkit\\win-ia32\\nw.exe --remote-debugging-port=9222 '+appname);
@@ -81,15 +84,18 @@ var addscriptscript=function() {
 	zip.addFile(shellscriptname,shellscriptname);
 }
 
-if (appname!='ksanapc') addscriptscript();
+if (appname!='ksanapc') addshellscript();
 for (var i in app) {
 	var deploy=require('./'+app[i]+'/deploy.json');
 	addapp(deploy);
 }
 //create 
-console.log('SAVING.....')
+console.log("");
+console.log('.....Creating Zip file.....')
 zip.saveAs(zipname,function() {
-   console.log("zip file created: "+zipname);
+   console.log('time elapsed in seconds', Math.round(new Date()-starttime)/1000);
+   console.log("zip file created: ");
+   console.log(zipname);
    if (fs.existsSync(shellscriptname)) {
    		fs.unlink(shellscriptname);
    }
