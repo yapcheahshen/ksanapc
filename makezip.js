@@ -4,7 +4,7 @@ var app=argv;
 app.shift();app.shift();
 var date =new Date().toISOString().substring(0,10);
 var appname=(app[0]||'ksanapc');
-var zipname=appname +'-'+process.platform+'-'+date+'.zip';
+var zipname='%zip%/'+appname +'-'+process.platform+'-'+date+'.zip';
 var shellscript={
 	'win32':'.cmd',
 	'darwin':'.command',
