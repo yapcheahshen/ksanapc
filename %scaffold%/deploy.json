@@ -1,0 +1,20 @@
+{
+	"files":[
+		"%scaffold%/aura_components",
+		"%scaffold%/xml",
+		"%scaffold%/css",
+		"%scaffold%/index.js",
+		"%scaffold%/index.html",
+		"%scaffold%/package.json",
+		"%scaffold%/config.json",
+		"%scaffold%/LICENSE",
+		"%scaffold%/README.md",
+		"kse"
+	],
+	"osx" :[
+		"%scaffold%/run.command"
+	],
+	"win32" :[
+		"%scaffold%/run.cmd"
+	]	
+}

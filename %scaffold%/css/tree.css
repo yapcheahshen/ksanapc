@@ -1,0 +1,10 @@
+.arrow-right {
+	background-image: url(right.png);
+	background-repeat: no-repeat;
+	background-size:85%;
+}
+.arrow-down {
+	background-image: url(down.png);
+	background-repeat: no-repeat;
+	background-size:100%;
+}

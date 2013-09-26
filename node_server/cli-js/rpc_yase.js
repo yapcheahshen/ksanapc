@@ -25,6 +25,7 @@ function(host) {
 	exports.getBlob=makeinf("getBlob");
 	exports.customfunc=makeinf("customfunc");
 	exports.getTagInRange=makeinf("getTagInRange");
+	exports.exist=makeinf("exist");
 	
 
 //	exports.getpage=makeinf("getpage");
