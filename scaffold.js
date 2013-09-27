@@ -8,7 +8,9 @@ var app=argv;
 app.shift();app.shift();
 var appname=app[0];
 var forcecreate=app.length>1 &&app[1]=='-f';
+var templatepath=(app[2]||"kse") +'/';
 var path=require('path');
+
 var getgiturl=function() {
 	var url=fs.readFileSync(appname+'/.git/config','utf8');//.match(/url = (.*?)\n/);
 	url=url.substr(url.indexOf('url ='),100);
@@ -79,7 +81,7 @@ var replaceid=function(source) {
 var copyfile=function(source) {
 	if (source.indexOf('%scaffold%')==-1) return;
 	var stats = fs.lstatSync(source);
-	var target=source.replace(/%scaffold%/g,appname);
+	var target=source.replace(templatepath+'%scaffold%',appname);
 	var targetpath=target;
 	var arr=null;
 	if (!stats.isDirectory()) {
@@ -102,10 +104,10 @@ var copyfile=function(source) {
 }
 
 console.log('create scaffold for git',giturl)
-var deploy=require('./%scaffold%/deploy');
+var deploy=require('./'+templatepath+'%scaffold%/deploy');
 for (var i in deploy) {
 	for (var j in deploy[i]) {
-		copyfile(deploy[i][j]);
+		copyfile(templatepath+deploy[i][j]);
 	}
 }
-copyfile('%scaffold%/deploy.json');
+copyfile(templatepath+'%scaffold%/deploy.json');
