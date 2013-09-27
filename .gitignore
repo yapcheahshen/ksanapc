@@ -1,3 +1,4 @@
+.DS_Store
 node_modules
 node_webkit/win-ia32
 node_webkit/osx-ia32
@@ -13,3 +14,10 @@ kangxizidian
 epoxytest
 *.zip
 updateskip.json
+tipitaka
+mingshilu
+mingautotag
+test
+ydb
+aura
+cst

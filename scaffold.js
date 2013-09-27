@@ -7,10 +7,14 @@ var argv=process.argv;
 var app=argv;
 app.shift();app.shift();
 var appname=app[0];
-var forcecreate=app.length>1 &&app[1]=='-f';
-var templatepath=(app[2]||"kse") +'/';
+var forcecreate=app.length>2 &&app[2]=='--overwrite';
+var templatepath=(app[1]||"kse") +'/';
 var path=require('path');
 
+if (!fs.existsSync(templatepath+'/%scaffold%')) {
+	console.log(templatepath+' has no scaffold template');
+	return;
+}
 var getgiturl=function() {
 	var url=fs.readFileSync(appname+'/.git/config','utf8');//.match(/url = (.*?)\n/);
 	url=url.substr(url.indexOf('url ='),100);
@@ -22,14 +26,14 @@ var die=function() {
 	process.exit(1);
 }
 
-if (!appname) die('node scaffold newappname');
+if (!appname) die('node scaffold newappname template --overwrite');
 if (!fs.existsSync(appname)) die('folder not exists');
 if (!fs.existsSync(appname+'/.git')) die('not a git repository');
 
 
 var giturl=getgiturl();
 if (!forcecreate && fs.existsSync(appname+'/package.json')) {
-	die(giturl,'is not a brand new repo, add -f at the end to force create, all files will be overwrite');
+	die(giturl,'is not a brand new repo, add --overwrite at the end to force create, all files will be overwrite');
 }
 
 var walk = function(dir) {
