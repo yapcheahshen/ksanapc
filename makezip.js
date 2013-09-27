@@ -7,7 +7,8 @@ var app=argv;
 app.shift();app.shift();
 var date =new Date().toISOString().substring(0,10);
 var appname=(app[0]||'ksanapc');
-var zipname='%zip%/'+appname +'-'+process.platform+'-'+date+'.zip';
+var zipname=appname +'-'+process.platform+'-'+date+'.zip';
+if (appname!="ksanapc") zipname=appname+'/'+zipname;
 var shellscript={
 	'win32':'.cmd',
 	'darwin':'.command',
