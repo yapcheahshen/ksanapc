@@ -86,6 +86,7 @@ var copyfile=function(source) {
 	if (source.indexOf('%scaffold%')==-1) return;
 	var stats = fs.lstatSync(source);
 	var target=source.replace(templatepath+'%scaffold%',appname);
+	var target=target.replace('%scaffold%',appname);
 	var targetpath=target;
 	var arr=null;
 	if (!stats.isDirectory()) {
@@ -115,3 +116,6 @@ for (var i in deploy) {
 	}
 }
 copyfile(templatepath+'%scaffold%/deploy.json');
+//build ydb for user
+//process.chdir(appname+'/xml/');
+//require('child_process').exec('node '+appname);
