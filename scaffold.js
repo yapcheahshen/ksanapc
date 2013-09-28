@@ -10,7 +10,7 @@ var appname=app[0];
 var forcecreate=app.length>2 &&app[2]=='--overwrite';
 var templatepath=(app[1]||"kse") +'/';
 var path=require('path');
-
+var tobecopied=0;
 if (!fs.existsSync(templatepath+'/%scaffold%')) {
 	console.log(templatepath+' has no scaffold template');
 	return;
@@ -83,10 +83,16 @@ var replaceid=function(source) {
 	return arr.join('\n');
 }
 var copyfile=function(source) {
-	if (source.indexOf('%scaffold%')==-1) return;
+	if (source.indexOf('%scaffold%')==-1) {
+		console.log('not scaffold',source)
+		return;
+	}
+	tobecopied++;
 	var stats = fs.lstatSync(source);
 	var target=source.replace(templatepath+'%scaffold%',appname);
+
 	var target=target.replace('%scaffold%',appname);
+
 	var targetpath=target;
 	var arr=null;
 	if (!stats.isDirectory()) {
@@ -95,9 +101,10 @@ var copyfile=function(source) {
 	}	
 	
 	mkdirParent(targetpath,function(err){
+			tobecopied--;
 	 		if (stats.isDirectory()) return;
 	 		console.log('create',target)
-			fs.writeFileSync(target,arr,'utf8');	
+			fs.writeFileSync(target,arr,'utf8');
 	});
 	
 
@@ -117,5 +124,14 @@ for (var i in deploy) {
 }
 copyfile(templatepath+'%scaffold%/deploy.json');
 //build ydb for user
-//process.chdir(appname+'/xml/');
-//require('child_process').exec('node '+appname);
+var timer=setInterval(function(){
+	console.log(tobecopied)
+	if (tobecopied==0) {
+		console.log('build database')
+		process.chdir(appname+'/xml/');
+		require('./'+appname+'/xml'+'/'+appname);
+		process.chdir('../..')
+		clearInterval(timer)
+		console.log('done');
+	}
+},100)
