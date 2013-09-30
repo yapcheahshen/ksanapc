@@ -105,6 +105,10 @@ var copyfile=function(source) {
 	 		if (stats.isDirectory()) return;
 	 		console.log('create',target)
 			fs.writeFileSync(target,arr,'utf8');
+			if (target.indexOf('.command')>-1 ||
+			    target.indexOf('.sh')>-1){
+				fs.chmodSync(target,'0755');
+			}
 	});
 	
 
