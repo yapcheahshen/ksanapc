@@ -2,6 +2,7 @@ var vows = require('vows'),
     assert = require('assert'),
     flattoc=require('../flattoc');
 vows.describe('flat toc test suite').addBatch({
+	/*
     'flattoc': {
         topic: function () {
         		toc= require('./sampletoc')
@@ -52,6 +53,30 @@ vows.describe('flat toc test suite').addBatch({
 		assert.equal(r[2],undefined);
 		assert.equal(r[3],undefined);
 		assert.deepEqual(r.lineage,[0,1]);
+	}
+},*/
+	'flattoc2': {
+        topic: function () {
+        toc= require('./sampletoc2')
+        flattoc.set(toc);
+        return toc;
+	},
+	lineage:function(topic) {
+		var r=flattoc.go(11);	
+		assert.deepEqual(r.lineage,[0,9,11]);
+		assert.deepEqual(r[0],[0,13,24,25]);
+		assert.deepEqual(r[1],[1,5,9]);
+		assert.deepEqual(r[2],[10,11,12]);
+	},
+	lineage2:function(topic) {
+		var r=flattoc.go(14);	
+		console.log(r)	
+		assert.deepEqual(r.lineage,[13,14]);
+		assert.deepEqual(r[0],[0,13,24,25]);
+		assert.deepEqual(r[1],[14,21]);
+		assert.deepEqual(r[2],[15,18]);
+		assert.deepEqual(r[3],[16]);
+		assert.deepEqual(r[4],[17]);
 	}
 
 }	

@@ -32,8 +32,50 @@ define(function(){
 		var seq=closest(slot);
 		return go(seq);
 	}
-
-	var go=function(seq) { //one pass!
+	var go=function(seq) {
+		var R={ lineage:[]};
+		if (seq<0 || seq>=toc.length) return R;
+		var getsibling=function(now) {
+			var sibling=[],parent=0;
+			var D=toc[now].depth;
+			for (var i=now-1;i>=0;i--) {
+				if (toc[i].depth==D) sibling.unshift(i);
+				else if (toc[i].depth<D) {
+					parent=i;
+					break;
+				}
+			}
+			for (var i=now;i<toc.length;i++) {
+				if (toc[i].depth==D) sibling.push(i);	
+				else if (toc[i].depth<D) break;
+			}
+			return {sibling:sibling, parent:parent};
+		}
+		var n=seq;
+		var depth=toc[n].depth;
+		while (depth>=0) { //parents
+			R.lineage[depth]=n;
+			var S=getsibling(n);
+			R[depth]=S.sibling;
+			n=S.parent;
+			depth--;
+		}
+		var depth=toc[seq].depth;
+		var n=seq+1;
+		while (true) { //children
+			
+			if (toc[n].depth==depth+1) {
+				var S=getsibling(n);
+				if (S.sibling.length==0) break;
+				R[++depth]=S.sibling;
+				R.lineage[depth]=n;
+				n++;
+			} else break;
+		}
+		
+		return R;
+	}
+	var go1=function(seq) { //one pass!
 		var R={ lineage:[]};
 		if (seq<0) return R;
 		var terminator=-1;
@@ -43,7 +85,7 @@ define(function(){
 			return R[d][R[d].length-1]!=terminator;
 		}
 		var close=function(d) {
-			while (R[d] && R[d].length && opening(d)) {R[d].push(terminator);d++}
+			while (R[d] && R[d].length && opening(d)) {R[d++].push(terminator)};
 		}
 		for (var i=0;i<toc.length;i++) {
 			var D=toc[i].depth;
