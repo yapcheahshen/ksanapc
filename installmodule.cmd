@@ -1,1 +1,1 @@
-npm  install  yadb  yase  refinery
+npm  install  yadb  yase  refinery pali tibetan
