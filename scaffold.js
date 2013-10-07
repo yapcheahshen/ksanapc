@@ -90,7 +90,6 @@ var copyfile=function(source) {
 	tobecopied++;
 	var stats = fs.lstatSync(source);
 	var target=source.replace(templatepath+'%scaffold%',appname);
-
 	var target=target.replace('%scaffold%',appname);
 
 	var targetpath=target;

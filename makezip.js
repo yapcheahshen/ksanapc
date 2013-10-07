@@ -2,9 +2,7 @@
 	create stand-alone deployable zip, without any dependency.
 */
 var fs=require('fs');
-var argv=process.argv;
-var app=argv;
-app.shift();app.shift();
+var app=process.argv.slice(2);
 var date =new Date().toISOString().substring(0,10);
 var appname=(app[0]||'ksanapc');
 var zipname=appname +'-'+process.platform+'-'+date+'.zip';
