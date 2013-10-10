@@ -21,11 +21,13 @@ function(host) {
 	exports.fillText=makeinf("fillText");
 	exports.getRange=makeinf("getRange");
 	exports.findTag=makeinf("findTag");
+	exports.findTagBySelectors=makeinf("findTagBySelectors");
 	exports.getRaw=makeinf("getRaw");
 	exports.getBlob=makeinf("getBlob");
 	exports.customfunc=makeinf("customfunc");
 	exports.getTagInRange=makeinf("getTagInRange");
 	exports.exist=makeinf("exist");
+	exports.keyExists=makeinf("keyExists");
 	
 
 //	exports.getpage=makeinf("getpage");

@@ -13,7 +13,7 @@ requirejs.config( {
 		jquery: './jquery',
 		underscore: './underscore',
 		backbone: './backbone',
-		backbone_epoxy: './backbone.epoxy',
+		//backbone_epoxy: './backbone.epoxy',
 		requirelib:'./require',
 		text:'./requiretext',
 	    bootstrap:'./bootstrap',
@@ -49,7 +49,7 @@ requirejs.config( {
 
 
 requirejs(['jquery','underscore','backbone','requirelib','socketio','aem'
-,'text','eventemitter','backbone_epoxy','aura','debug','mediator','components'
+,'text','eventemitter','aura','debug','mediator','components'
 ],function() {
 	window.jQuery=$;
 	requirejs(['bootstrap','bootbox']);

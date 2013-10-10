@@ -32,7 +32,9 @@ define(function() {
             getRaw: makeinf('getRaw'),
             getBlob: makeinf('getBlob'),
             findTag: makeinf('findTag'),
+            findTagBySelectors: makeinf('findTagBySelectors'),
             exist: makeinf('exist'),
+            keyExists: makeinf('keyExists'),
             customfunc: makeinf('customfunc'),
             version: app.sandbox.services["yase"].version()
         };  
