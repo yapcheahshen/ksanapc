@@ -63,8 +63,7 @@ define(function(){
 		var depth=toc[seq].depth;
 		var n=seq+1;
 		while (true) { //children
-			
-			if (toc[n].depth==depth+1) {
+			if (n<toc.length&&toc[n].depth==depth+1) {
 				var S=getsibling(n);
 				if (S.sibling.length==0) break;
 				R[++depth]=S.sibling;
