@@ -17,6 +17,8 @@ function(host) {
 	exports.getTagAttr=makeinf("getTagAttr");
 	exports.getTagInRange=makeinf("getTagInRange");
 	exports.buildToc=makeinf("buildToc");
+	exports.expandToken=makeinf("expandToken");
+	
 	
 	exports.fillText=makeinf("fillText");
 	exports.getRange=makeinf("getRange");

@@ -32,6 +32,8 @@ define(function() {
             getRaw: makeinf('getRaw'),
             getBlob: makeinf('getBlob'),
             findTag: makeinf('findTag'),
+            expandToken: makeinf('expandToken'),
+            
             findTagBySelectors: makeinf('findTagBySelectors'),
             exist: makeinf('exist'),
             keyExists: makeinf('keyExists'),

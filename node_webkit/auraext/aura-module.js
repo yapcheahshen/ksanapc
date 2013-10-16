@@ -8,7 +8,8 @@ return {
 		console.log('module version',mod,m)
 		var v=ver.match(/(\d*?)\.(\d*?)\.(\d*)/);
 		if (!m) return false;
-		return  (parseInt(m[1])>=parseInt(v[1]) && parseInt(m[2])>=parseInt(v[2]) && parseInt(m[3])>=parseInt(v[3]));
+		var oldversion=parseInt(v[1])*65536+parseInt(v[2])*256+parseInt(v[3]);
+		var newversion=parseInt(m[1])*65536+parseInt(m[2])*256+parseInt(m[3]);
 	}
   },
   afterAppStart: function() {
