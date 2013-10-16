@@ -10,6 +10,7 @@ return {
 		if (!m) return false;
 		var oldversion=parseInt(v[1])*65536+parseInt(v[2])*256+parseInt(v[3]);
 		var newversion=parseInt(m[1])*65536+parseInt(m[2])*256+parseInt(m[3]);
+		return newversion>oldversion;
 	}
   },
   afterAppStart: function() {
