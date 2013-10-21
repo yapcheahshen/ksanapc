@@ -2,17 +2,18 @@
 	create stand-alone deployable zip, without any dependency.
 */
 var fs=require('fs');
-var app=process.argv.slice(2);
+var appname=process.argv[2] ||'ksanapc';
 var date =new Date().toISOString().substring(0,10);
-var appname=(app[0]||'ksanapc');
-var zipname=appname +'-'+process.platform+'-'+date+'.zip';
+
+var platform=process.argv[3] || process.platform;
+var zipname=appname +'-'+platform+'-'+date+'.zip';
 if (appname!="ksanapc") zipname=appname+'/'+zipname;
 var shellscript={
 	'win32':'.cmd',
 	'darwin':'.command',
 	'linux':'.sh'
 }
-var shellscriptname='start-'+appname + shellscript[process.platform];
+var shellscriptname='start-'+appname + shellscript[platform];
 
 var ZipWriter = require("./zipwriter").ZipWriter;
 var zip = new ZipWriter();
@@ -60,13 +61,13 @@ var addtozip=function(files) {
 }
 var addapp=function(deploy) {
 	addtozip(deploy.files);
-	addtozip(deploy[process.platform]);
+	addtozip(deploy[platform]);
 }
 
 addapp(require('./deploy.json')); // ksanapc
 
 var addshellscript=function() {
-	var script=[], P=process.platform;
+	var script=[], P=platform;
 	if ('win32'==P) {
 		script.push('start node_webkit\\win-ia32\\nw.exe --remote-debugging-port=9222 '+appname);
 	} else if ('darwin'==P) {
@@ -84,10 +85,9 @@ var addshellscript=function() {
 }
 
 if (appname!='ksanapc') addshellscript();
-for (var i in app) {
-	var deploy=require('./'+app[i]+'/deploy.json');
-	addapp(deploy);
-}
+var deploy=require('./'+appname+'/deploy.json');
+addapp(deploy);
+
 //create 
 console.log("");
 console.log('.....Creating Zip file.....')
