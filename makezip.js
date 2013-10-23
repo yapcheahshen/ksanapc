@@ -77,6 +77,7 @@ var addshellscript=function() {
 	if ('win32'==P) {
 		script.push('start node_webkit\\win-ia32\\nw.exe --remote-debugging-port=9222 '+appname);
 	} else if ('darwin'==P) {
+		script.push('#!/bin/sh');
 		script.push('cd "$(dirname "$0")"');
 		script.push('./node_webkit/osx-ia32/node-webkit.app/Contents/MacOS/node-webkit --remote-debugging-port=9222 '+appname);
 	} else if ('linux'==P) {
