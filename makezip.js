@@ -2,17 +2,23 @@
 	create stand-alone deployable zip, without any dependency.
 */
 var fs=require('fs');
+var app=process.argv.slice(2);
 var appname=process.argv[2] ||'ksanapc';
 var date =new Date().toISOString().substring(0,10);
-
-var platform=process.argv[3] || process.platform;
-var zipname=appname +'-'+platform+'-'+date+'.zip';
-if (appname!="ksanapc") zipname=appname+'/'+zipname;
 var shellscript={
 	'win32':'.cmd',
 	'darwin':'.command',
 	'linux':'.sh'
 }
+var platform=process.platform;
+
+if (shellscript[app[app.length-1]]) {
+	platform=app[app.length-1];
+	app.pop();
+}
+
+var zipname=appname +'-'+platform+'-'+date+'.zip';
+if (appname!="ksanapc") zipname=appname+'/'+zipname;
 var shellscriptname='start-'+appname + shellscript[platform];
 
 var ZipWriter = require("./zipwriter").ZipWriter;
@@ -71,12 +77,10 @@ var addshellscript=function() {
 	if ('win32'==P) {
 		script.push('start node_webkit\\win-ia32\\nw.exe --remote-debugging-port=9222 '+appname);
 	} else if ('darwin'==P) {
-		script.push('DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"');
-		script.push('cd $DIR');
+		script.push('cd "$(dirname "$0")"');
 		script.push('./node_webkit/osx-ia32/node-webkit.app/Contents/MacOS/node-webkit --remote-debugging-port=9222 '+appname);
 	} else if ('linux'==P) {
-		script.push('DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"');
-		script.push('cd $DIR');
+		script.push('cd "$(dirname "$0")"');
 		script.push('./node_webkit/linux-ia32/nw --remote-debugging-port=9222 '+appname);
 	} else throw 'unsupported platform';
 
@@ -85,8 +89,10 @@ var addshellscript=function() {
 }
 
 if (appname!='ksanapc') addshellscript();
-var deploy=require('./'+appname+'/deploy.json');
-addapp(deploy);
+for (var i in app) {
+	var deploy=require('./'+app[i]+'/deploy.json');
+	addapp(deploy);
+}
 
 //create 
 console.log("");
