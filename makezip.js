@@ -10,6 +10,11 @@ var shellscript={
 	'darwin':'.command',
 	'linux':'.sh'
 }
+var eol={
+	'win32':'\r\n',
+	'darwin':'\n',
+	'linux':'\r'
+}
 var platform=process.platform;
 
 if (shellscript[app[app.length-1]]) {
@@ -84,7 +89,7 @@ var addshellscript=function() {
 		script.push('./node_webkit/linux-ia32/nw --remote-debugging-port=9222 '+appname);
 	} else throw 'unsupported platform';
 
-	fs.writeFileSync(shellscriptname,script.join(require('os').EOL),'ascii');
+	fs.writeFileSync(shellscriptname,script.join(eol[platform]),'ascii');
 	zip.addFile(shellscriptname,shellscriptname);
 }
 
