@@ -21,6 +21,8 @@ define(function() {
         api_yase(app.sandbox.services); //install api into services
         app.sandbox.yase={ //turn into async, for compatible with node_server
             phraseSearch: makeinf('phraseSearch'),
+            boolSearch: makeinf('boolSearch'),
+            search: makeinf('search'),
             getText: makeinf('getText'),
             getTextByTag: makeinf('getTextByTag'),
             getTextRange:makeinf('getTextRange'),

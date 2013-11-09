@@ -11,6 +11,8 @@ function(host) {
 	
 	exports.initialize=makeinf("initialize");
 	exports.phraseSearch=makeinf("phraseSearch");
+	exports.boolSearch=makeinf("boolSearch");
+	exports.search=makeinf("search");
 	exports.getText=makeinf("getText");
 	exports.getTextByTag=makeinf("getTextByTag");
 	exports.closestTag=makeinf("closestTag");
