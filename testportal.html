@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>QUnit Test Protal</title>
+  <link rel="stylesheet" href="node_webkit/css/qunit.css">
+</head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+  <script src="node_webkit/jslib/qunit.js"></script>
+  <script type="text/javascript">
+    if (location.hash.length) {
+		var fileref=document.createElement('script');
+		var filename=location.hash.substring(1);
+  		fileref.setAttribute("type","text/javascript")
+  	    fileref.setAttribute("src", filename)
+  	    document.getElementsByTagName("head")[0].appendChild(fileref);
+    } else {
+    	document.write('missing test filename')
+    }
+  
+  </script>
+</body>
+</html>

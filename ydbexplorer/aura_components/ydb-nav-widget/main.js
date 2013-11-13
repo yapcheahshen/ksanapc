@@ -16,7 +16,7 @@ define(['underscore','text!./nav.tmpl','backbone'],
             if (typeof c=='string' && c.charCodeAt(0)==0) {
               count='?'; //unknown , to be load
               c="...";
-              extratype="";
+              extratype="label-default";
             } else if ( typeof c=='object') {
               count=c.length;
               if (typeof count=='undefined') count=Object.keys(c).length;
