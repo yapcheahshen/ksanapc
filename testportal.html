@@ -16,6 +16,9 @@
   		fileref.setAttribute("type","text/javascript")
   	    fileref.setAttribute("src", filename)
   	    document.getElementsByTagName("head")[0].appendChild(fileref);
+  	    filename=filename.replace(/\\/g,'/');
+  	    var path=filename.substring(0,filename.lastIndexOf('/'));
+  	    process.chdir(path);//for node context
     } else {
     	document.write('missing test filename')
     }
