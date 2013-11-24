@@ -23,7 +23,7 @@ var port=argv[3] || "2555";  //default port
 var autostart=!!argv[2];
 var startfolder=argv[2]||"launcher"; 
 var appendhtml=false;
-var nocacheforjs=true; //set to false for production server
+
 port=parseInt(port);
 process.chdir('..');
 function dirExistsSync (d) {
@@ -40,16 +40,18 @@ try { return fs.statSync(d).isDirectory() }
  }
  
 var servestatic=function(filename,stat,req,res) {
+	var ext=filename.substring(filename.lastIndexOf("."));
 	var etag = stat.size + '-' + Date.parse(stat.mtime);
-
+	var nocache=(req.connection.remoteAddress=='127.0.0.1') && 
+	(ext=='.js' || ext=='.tmpl');
 	
-	if(req.headers['if-none-match'] === etag) {
+	if(!nocache && req.headers['if-none-match'] === etag) {
 		res.statusCode = 304;
 		res.end();
 	} else {
-		var ext=filename.substring(filename.lastIndexOf("."));
+		
 		var mimeType = mimeTypes[path.extname(filename).split(".")[1]];
-		if (nocacheforjs && (ext=='.js' || ext=='.tmpl')) {
+		if ( nocache) {
 			console.log('serving no cache file '+filename);
 			res.writeHead(200, {'Content-Type':
 			mimeType,'Content-Length':stat.size	} );
