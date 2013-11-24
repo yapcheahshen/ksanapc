@@ -49,6 +49,28 @@ define(function() {
           app.sandbox.yase=yase;
         });
      }
+
+     if ($ && $.Deferred) {
+        app.sandbox.$yase=function(api,opts) {
+          if (typeof app.sandbox.yase[api]!=='function') {
+            throw api+' not found';
+            return;
+          }
+          var deferred = new $.Deferred();
+          var promise=deferred.promise();
+          var that=this;
+
+          app.sandbox.yase[api](opts,function(err,data){
+            if (err) deferred.fail(err);
+            else deferred.resolveWith(that,[data]);
+            deferred.always(err);
+          });
+
+          return promise;
+        }
+     } else {
+       console.error('jquery has not Deffered, upgrade to newer version')
+     }
   },
   afterAppStart: function() {
   }
