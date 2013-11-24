@@ -12,6 +12,7 @@ define(function() {
               var data=app.sandbox.services["yase"][name](opts);
               //this line is not really needed.
               setTimeout( function() { callback(0,data) }, 0);        
+             //callback(0,data);
       }
    }
      if (typeof process !='undefined' &&process.versions['node-webkit']) {

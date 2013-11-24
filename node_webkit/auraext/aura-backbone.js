@@ -1,7 +1,7 @@
 /*from https://github.com/sbellity/aura-backbone-example/blob/master/app/extensions/aura-backbone.js#L16
   report issue https://github.com/sbellity/aura-backbone-example/issues/1
 */
-
+/*
 (function() {
   var historyStarted = false;
   define({
@@ -48,6 +48,9 @@
       });
 
       app.components.after('initialize',function(){
+        if (this.view.initialized) {
+          this.view.initialized();
+        }
       //  this.view.setElement(this.$el,true);
       })
 
@@ -68,7 +71,7 @@
   })
 })();
 
-/*
+*/
 define(function() {
   return function(app) {
     var _ = app.core.util._;
@@ -89,12 +92,14 @@ define(function() {
         app.core.mvc    = Backbone;
         app.sandbox.mvc = Backbone;
         //app.core.registerWidgetType('Backbone', Backbone.View.prototype);
+        /*
         var myview=Backbone.View.extend({
           constructor:function() {
             //Backbone.View.apply(this);
             this.$yase=this.sandbox.$yase.bind(this);
           }
         });
+*/
         app.components.addType('Backbone',Backbone.View.prototype);
         //app.components.addType('Backbone.Epoxy', Backbone.Epoxy.View.prototype);
       },
@@ -111,4 +116,3 @@ define(function() {
   }
 });
 
-*/
