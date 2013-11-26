@@ -5,7 +5,7 @@ http://blog.shinetech.com/2012/10/10/efficient-stateful-views-with-backbone-js-p
 
 */
 define(['jquery','underscore','backbone'],function($,_,Backbone){
-	var ksanaView=Backbone.View.extend({
+	var nestedView=Backbone.View.extend({
       $yase: function(){ //promise interface
             return this.sandbox.$yase.apply(this,arguments)
       },
@@ -78,8 +78,23 @@ define(['jquery','underscore','backbone'],function($,_,Backbone){
       		}
       	}
       	return this;
+      },
+      sendAll:function() { //send to all descendant
+            for (var i in this._children) {
+                  var C=this._children[i];
+                  if (typeof C.receive=='function'){
+                        C.receive(arguments);
+                  } else { // events-like comand map
+                        var func=C.receive[arguments[0]];
+                        var remain=Array.prototype.slice.apply(arguments,[1]);
+                        if (func) func.apply(C,remain);
+                        //else console.warn('cannot send '+arguments[0]);
+                  }
+                  C.send.apply(C,arguments);
+            }
+            return this;            
       }
 
     });
-    return ksanaView;
+    return nestedView;
 });
