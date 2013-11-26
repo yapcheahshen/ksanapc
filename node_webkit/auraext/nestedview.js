@@ -2,7 +2,7 @@
 /* backbone nested view extension 
 inspired from 
 http://blog.shinetech.com/2012/10/10/efficient-stateful-views-with-backbone-js-part-1/
-
+http://bardevblog.wordpress.com/2012/12/13/re-learning-backbone-js-nested-views/
 */
 define(['jquery','underscore','backbone'],function($,_,Backbone){
 	var nestedView=Backbone.View.extend({
@@ -29,6 +29,18 @@ define(['jquery','underscore','backbone'],function($,_,Backbone){
       		this.addchild(hview);
       	}
       },
+      newAuraComponent:function(componentName,opts){
+            if (!componentName) return;
+            var attributes='"';
+            for (var i in opts) {
+                  attributes+=' '+i+'="'+opts[i]+'"';
+            }
+            var $child=$('<div><div data-aura-widget="'+componentName+
+                  attributes+'></div></div>');
+            this.$("#children").append($child);
+            if (this.sandbox) this.sandbox.start($child); //for Aura
+            this.addChild($child);
+      },      
       _addChild:function(child) {
             //TODO check if pure dom object
             if (child instanceof $) {
@@ -49,7 +61,7 @@ define(['jquery','underscore','backbone'],function($,_,Backbone){
       	if (!child)return;      	
             if (!this._children.length) {
                   //work around for first child is not initialized immediately
-                  setTimeout(this._addChild.bind(this,child),100);      
+                  setTimeout(this._addChild.bind(this,child),200);      
             } else {
                   this._addChild(child);
             }
