@@ -24,6 +24,7 @@ define(function() {
             phraseSearch: makeinf('phraseSearch'),
             boolSearch: makeinf('boolSearch'),
             search: makeinf('search'),
+            getTermVariants: makeinf('getTermVariants'),
             getText: makeinf('getText'),
             getTextByTag: makeinf('getTextByTag'),
             getTextRange:makeinf('getTextRange'),
@@ -51,27 +52,23 @@ define(function() {
         });
      }
 
-     if ($ && $.Deferred) {
-        app.sandbox.$yase=function(api,opts) {
-          if (typeof app.sandbox.yase[api]!=='function') {
-            throw api+' not found';
-            return;
-          }
-          var deferred = new $.Deferred();
-          var promise=deferred.promise();
-          var that=this;
-
-          app.sandbox.yase[api](opts,function(err,data){
-            if (err) deferred.fail(err);
-            else deferred.resolveWith(that,[data]);
-            deferred.always(err);
-          });
-
-          return promise;
+      app.sandbox.$yase=function(api,opts) {
+        if (typeof app.sandbox.yase[api]!=='function') {
+          throw api+' not found';
+          return;
         }
-     } else {
-       console.error('jquery has not Deffered, upgrade to newer version')
-     }
+        var deferred = new $.Deferred();
+        var promise=deferred.promise();
+        var that=this;
+
+        app.sandbox.yase[api](opts,function(err,data){
+          if (err) deferred.fail(err);
+          else deferred.resolveWith(that,[data]);
+          deferred.always(err);
+        });
+
+        return promise;
+      }
   },
   afterAppStart: function() {
   }

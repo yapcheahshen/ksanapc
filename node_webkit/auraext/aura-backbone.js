@@ -72,7 +72,7 @@
 })();
 
 */
-define(function() {
+define(['./nestedview'],function(nestedView) {
   return function(app) {
     var _ = app.core.util._;
     var historyStarted = false;
@@ -91,17 +91,9 @@ define(function() {
         Backbone = requirejs('backbone');
         app.core.mvc    = Backbone;
         app.sandbox.mvc = Backbone;
-        //app.core.registerWidgetType('Backbone', Backbone.View.prototype);
-        /*
-        var myview=Backbone.View.extend({
-          constructor:function() {
-            //Backbone.View.apply(this);
-            this.$yase=this.sandbox.$yase.bind(this);
-          }
-        });
-*/
+
         app.components.addType('Backbone',Backbone.View.prototype);
-        //app.components.addType('Backbone.Epoxy', Backbone.Epoxy.View.prototype);
+        app.components.addType('Backbone.nested',nestedView.prototype);
       },
       afterAppStart: function(app) {
       	  
@@ -115,4 +107,3 @@ define(function() {
     }
   }
 });
-
