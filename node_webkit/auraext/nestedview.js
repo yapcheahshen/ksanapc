@@ -133,7 +133,7 @@ define(['jquery','underscore','backbone'],function($,_,Backbone){
 
                   if (func) func.apply(C,remain);
                   //else console.warn('cannot send '+arguments[0]);
-                  C.send.apply(C,arguments);
+                  C.sendChildren.apply(C,arguments);
             }
             return this;            
       }
