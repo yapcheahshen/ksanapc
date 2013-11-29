@@ -21,7 +21,7 @@ define(['jquery','underscore','backbone'],function($,_,Backbone){
             }
       },
       addChildren:function(attrname) { //automatic add all child view, call this after html()
-      	attrname=attrname||'data-aura-widget'
+      	attrname=attrname||'data-aura-component'
       	var children=this.$("div["+attrname+"]");
       	this.closeChildren();
             this.children=[];
@@ -33,7 +33,7 @@ define(['jquery','underscore','backbone'],function($,_,Backbone){
             if (!componentName) return;
             var attributes='"';
             for (var i in opts) attributes+=' '+i+'="'+opts[i]+'"';
-            var $child=$('<div><div data-aura-widget="'+componentName+
+            var $child=$('<div><div data-aura-component="'+componentName+
                   attributes+'></div></div>');
             this.$("#children").append($child);
             if (this.sandbox) this.sandbox.start($child); //for Aura
@@ -44,8 +44,8 @@ define(['jquery','underscore','backbone'],function($,_,Backbone){
             //TODO check if pure dom object
             if (child instanceof $) {
                   var hview=child.data('hview');
-                  if (!hview) { //handle <div><div data-aura-widget></div></div>
-                        hview=child.find("[data-aura-widget]").data('hview');      
+                  if (!hview) { //handle <div><div data-aura-component></div></div>
+                        hview=child.find("[data-aura-component]").data('hview');      
                   }
                   this.addChild(hview);
             } else {
@@ -53,9 +53,13 @@ define(['jquery','underscore','backbone'],function($,_,Backbone){
                         console.error('adding empty child');
                         return;
                   }
-                  child._parent=this;
-                  if (_(this._children).indexOf(child) === -1) {
-                        this._children.push(child);
+                  if (child._parent) {
+                        console.error('owned by ',child._parent);
+                  } else {
+                        child._parent=this;
+                        if (_(this._children).indexOf(child) === -1) {
+                              this._children.push(child);
+                        }                        
                   }
             }
             return child;
@@ -101,7 +105,9 @@ define(['jquery','underscore','backbone'],function($,_,Backbone){
       },
       sendParent:function() { //send to parent
             if (!this._parent) {
-                  console.error('no parent');
+                  console.error("no parent, check if type:Backbone.nested"+
+                        ", call initNested in initialize"
+                        +"and call addChildren in parent view");
                   return;
             }
             var func=this._parent.commands[arguments[0]];
@@ -130,13 +136,23 @@ define(['jquery','underscore','backbone'],function($,_,Backbone){
                               return;
                         }
                   }
-
                   if (func) func.apply(C,remain);
                   //else console.warn('cannot send '+arguments[0]);
                   C.sendChildren.apply(C,arguments);
             }
             return this;            
+      },
+      toString:function(indent) {
+            indent=indent||"";
+            for (var i in this._children) {
+                  var C=this._children[i];
+                  console.log(indent+" "+C.$el.data("aura-component"));
+                  C.toString(indent+" ");
+            }
       }
     });
     return nestedView;
 });
+/*
+walk and return a hierachy
+*/

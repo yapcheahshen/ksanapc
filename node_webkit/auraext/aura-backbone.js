@@ -96,7 +96,6 @@ define(['./nestedview'],function(nestedView) {
         app.components.addType('Backbone.nested',nestedView.prototype);
       },
       afterAppStart: function(app) {
-      	  
         if (!historyStarted) {
           _.delay(function() {
             Backbone.history.start();  
