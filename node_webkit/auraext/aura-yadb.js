@@ -5,8 +5,15 @@
 */
 define(function() {
   return {
- 
- initialize: function(app) {
+    initialize: function(app) {
+     setpath=function(){
+      if (process && document.location.href) {
+        var indexpath=document.location.href.substring(8,document.location.href.length-11);
+        process.chdir(indexpath) ;
+        console.log('switch to '+indexpath)  
+      }  
+     };   
+     setpath();
      if (typeof process !='undefined' &&process.versions['node-webkit']) {
         /* compatible async interface for browser side js code*/
         var api_yadb=require('yadb').api ; 

@@ -12,7 +12,7 @@ define(['jquery','underscore','backbone'],function($,_,Backbone){
             return this.sandbox.$yase.apply(this,arguments)
       },
       initNested:function() { //maybe removed if aura provide a hook..
-      	this.$el.data('hview',this);
+      	console.error('obsolute!!')
       },
       closeChildren:function() {
             for (var i in this._children) {
@@ -20,13 +20,18 @@ define(['jquery','underscore','backbone'],function($,_,Backbone){
                   if (C.destroy) C.close(); else (C.remove());
             }
       },
-      addChildren:function(attrname) { //automatic add all child view, call this after html()
-      	attrname=attrname||'data-aura-component'
-      	var children=this.$("div["+attrname+"]");
+      _addChildren:function(extras) { //automatic add all child view, call this after html()
+      	var children=this.$("div[data-aura-component]");
       	this.closeChildren();
             this.children=[];
-      	for (var i=0;i<children.length;i++) {
-      		this.addChild($(children[i]));
+            var that=this;
+            for (var i=0;i<children.length;i++) {
+                  if (!children[i]) {
+                        console.error('empty child');
+                        continue;
+                  }
+                  var extra=(extras instanceof Array)?extras[i]:extra;
+                  this.addChild($(children[i]) , extra);
       	}
       },
       newAuraComponent:function(componentName,opts){
@@ -39,40 +44,36 @@ define(['jquery','underscore','backbone'],function($,_,Backbone){
             if (this.sandbox) this.sandbox.start($child); //for Aura
             this.addChild($child);
       },      
-      _addChild:function(child) {
-
+      _addChild:function(child,extra) {
             //TODO check if pure dom object
             if (child instanceof $) {
                   var hview=child.data('hview');
                   if (!hview) { //handle <div><div data-aura-component></div></div>
                         hview=child.find("[data-aura-component]").data('hview');      
                   }
-                  this.addChild(hview);
+                  if (hview) {
+                        this._addChild(hview,extra);
+                  } else {
+                        console.error(child[0].outerHTML,'set view type to Backbone.nested and call this.initNested()');
+                  }
             } else {
                   if (!child) {
                         console.error('adding empty child');
-                        return;
-                  }
-                  if (child._parent) {
+                  } else if (child._parent) {
                         console.error('owned by ',child._parent);
                   } else {
                         child._parent=this;
                         if (_(this._children).indexOf(child) === -1) {
                               this._children.push(child);
+                              var cb=child['onReady'];
+                              if (cb) cb.apply(child,[extra]);
                         }                        
                   }
             }
-            return child;
       },
-      addChild: function(child) {
-      	if (!child)return;
+      addChild: function(child,extra) {
             if (!this._children) this._children=[];
-            if (!this._children.length) {
-                  //work around for first child is not initialized immediately
-                  setTimeout(this._addChild.bind(this,child),200);      
-            } else {
-                  this._addChild(child);
-            }
+            this._addChild(child,extra);
       },
       // Deregisters a subview that has been manually closed by this view
       removeChild: function(child) {
@@ -105,9 +106,7 @@ define(['jquery','underscore','backbone'],function($,_,Backbone){
       },
       sendParent:function() { //send to parent
             if (!this._parent) {
-                  console.error("no parent, check if type:Backbone.nested"+
-                        ", call initNested in initialize"
-                        +"and call addChildren in parent view");
+                  console.error("no parent, check if type:Backbone.nested");
                   return;
             }
             var func=this._parent.commands[arguments[0]];
@@ -149,6 +148,14 @@ define(['jquery','underscore','backbone'],function($,_,Backbone){
                   console.log(indent+" "+C.$el.data("aura-component"));
                   C.toString(indent+" ");
             }
+      },
+      constructor:function() {
+            var instance=arguments[0]
+            $(instance.el).data('hview',this);
+            Backbone.View.apply(this, arguments);
+            console.log('initialized',this.el)
+            //this.$el.data('hview',this);
+            this.parent=null;
       }
     });
     return nestedView;
