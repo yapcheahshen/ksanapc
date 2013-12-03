@@ -6,7 +6,7 @@ http://bardevblog.wordpress.com/2012/12/13/re-learning-backbone-js-nested-views
 http://stackoverflow.com/questions/9337927/how-to-handle-initializing-and-rendering-subviews-in-backbone-js
 http://www.sophomoredev.com/2012/06/a-different-approach-to-rendering-backbone-sub-views/
 */
-define(['jquery','underscore','backbone'],function($,_,Backbone){
+define(['backbone'],function(Backbone){
 	var nestedView=Backbone.View.extend({
       $yase: function(){ //promise interface
             return this.sandbox.$yase.apply(this,arguments)
@@ -69,13 +69,9 @@ define(['jquery','underscore','backbone'],function($,_,Backbone){
       constructor:function() {
             Backbone.View.apply(this, arguments);
             if (this.$el.attr('data-aura-widget')) {
-                  console.log('OLDNAME',this.$el)
+                  console.warn('please replace data-aura-widget with data-aura-component',this.$el.attr('data-aura-widget'))
             }
-            console.log(this.$el.attr('data-aura-component'),'initialized')
       }
     });
     return nestedView;
 });
-/*
-walk and return a hierachy
-*/

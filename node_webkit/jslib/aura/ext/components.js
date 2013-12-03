@@ -490,12 +490,6 @@ define('aura/ext/components', function() {
           Component.startAll(list).done(function () {
             var components   = Array.prototype.slice.call(arguments);
             _.each(components, function (w) {
-              
-              // this line is added by yap !! 2013/12/3 //need by tabui
-              if (options && options.callback) {
-                console.log('calling callback of child')
-                options.callback();
-              } 
 
               w.sandbox._component = w;
               w.sandbox._parent = self;
