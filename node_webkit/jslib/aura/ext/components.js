@@ -494,28 +494,19 @@ define('aura/ext/components', function() {
               // this line is added by yap !! 2013/12/3 //need by tabui
               if (options && options.callback) {
                 console.log('calling callback of child')
-                //options.callback();
+                options.callback();
               } 
 
               w.sandbox._component = w;
               w.sandbox._parent = self;
               children.push(w.sandbox);
             });
-
             self._children = children;
 
-            // this section is added by yap !! 2013/12/3
-            var viewobj=$(self.el).data('hview');
-            if (viewobj) {
-              if (!viewobj._parent && viewobj.onReady)  viewobj.onReady();
-              //this line causes problem
-              if (viewobj._addChildren) viewobj._addChildren();
-              
-              if (viewobj.onChildrenAdded &&viewobj._children && viewobj._children.length) {
-                viewobj.onChildrenAdded();
-              }
+            //tell the parent children are ready
+            if (self._component && self._component.onReady) {
+              self._component.onReady();
             }
-
           });
 
           return this;
