@@ -20,6 +20,17 @@ define(function(){
 		/* slot field doesn't need to be sorted
 		   find the closest node
 		*/
+		var rangeend=function(slot) { // get the end of the node by slot
+			if (!slot) return;
+			var seq=closest(slot);
+			var depth=toc[seq].depth;
+			for (var i=seq+1;i<toc.length;i++) {
+				if (toc[i].depth<=depth) {
+					return toc[i].slot;
+				}
+			}
+			return -1;
+		};
 		var closest=function(slot) {
 			var min=0xffffffff;
 			var closest=-1;
@@ -81,6 +92,7 @@ define(function(){
 		this.goslot=goslot;
 		this.go=go;
 		this.closest=closest;
+		this.rangeend=rangeend;
 		return this;
 	}
 	

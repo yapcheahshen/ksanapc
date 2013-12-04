@@ -23,7 +23,9 @@ define(['backbone'],function(Backbone){
                         return;
                   }
             }
-            if (func) func.apply(this,remain);            
+            var that=this;
+            if (func) setTimeout(function(){return func.apply(that,remain)},1);
+            //if (func) func.apply(this,remain);            
       },
       sendChildrenByArray:function(command,params) {
             for (var i=0;i<this.sandbox._children.length;i++) {
@@ -65,6 +67,9 @@ define(['backbone'],function(Backbone){
                   console.log(indent+" "+C.$el.data("aura-component"));
                   C.toString(indent+" ");
             }
+      },
+      onReady:function() {
+            this.sandbox.logger.log(this.$el.data('aura-component'),'ready')
       },
       constructor:function() {
             Backbone.View.apply(this, arguments);
