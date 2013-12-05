@@ -43,7 +43,9 @@ define(function() {
             exist: makeinf('exist'),
             keyExists: makeinf('keyExists'),
             customfunc: makeinf('customfunc'),
-            version: app.sandbox.services["yase"].version()
+            version: app.sandbox.services["yase"].version(),
+
+            enumLocalYdb:makeinf('enumLocalYdb'),
         };  
      } else {
         //for node_server , use socket.io to talk to server-side yase_api.js

@@ -32,7 +32,7 @@ function(host) {
 	exports.getTagInRange=makeinf("getTagInRange");
 	exports.exist=makeinf("exist");
 	exports.keyExists=makeinf("keyExists");
-	
+	exports.enumLocalYdb=makeinf("enumLocalYdb");
 
 //	exports.getpage=makeinf("getpage");
 //	exports.fuzzysearch=makeinf("fuzzysearch");

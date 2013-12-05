@@ -497,7 +497,15 @@ define('aura/ext/components', function() {
             });
             self._children = children;
 
+
             //tell the parent children are ready
+            /*
+            if (!self._component) {
+              console.log(self.el,'not aura')
+            } else {
+            //  console.log(self._component.$el.data('aura-component'),'ready')
+            }
+            */
             if (self._component && self._component.onReady) {
               self._component.onReady();
             }
