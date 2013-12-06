@@ -33,6 +33,7 @@ function(host) {
 	exports.exist=makeinf("exist");
 	exports.keyExists=makeinf("keyExists");
 	exports.enumLocalYdb=makeinf("enumLocalYdb");
+	exports.sameId=makeinf("sameId");
 
 //	exports.getpage=makeinf("getpage");
 //	exports.fuzzysearch=makeinf("fuzzysearch");

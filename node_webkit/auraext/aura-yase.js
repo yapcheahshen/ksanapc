@@ -46,6 +46,7 @@ define(function() {
             version: app.sandbox.services["yase"].version(),
 
             enumLocalYdb:makeinf('enumLocalYdb'),
+            sameId:makeinf('sameId'),
         };  
      } else {
         //for node_server , use socket.io to talk to server-side yase_api.js

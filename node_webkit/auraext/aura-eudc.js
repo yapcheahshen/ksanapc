@@ -11,6 +11,7 @@ define(['../jslib/base64','../jslib/kage/kage.amd','../jslib/cjk/dgg'],
 	    }
 	  }
 	}
+
 	var loadimages=function($el) {
 	  var images=$el.find("img[title]");
 	  var sandbox=this.sandbox;
@@ -22,6 +23,8 @@ define(['../jslib/base64','../jslib/kage/kage.amd','../jslib/cjk/dgg'],
 	    var blobpath='images/'+fn+'.png';
 	    yase.getBlob({db:this.db, blob:blobpath}, 
 	      this.sandbox.imagearrive($img));
+
+
 	  }
 	};
 return {

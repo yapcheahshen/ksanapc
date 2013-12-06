@@ -76,7 +76,10 @@ var addapp=function(deploy) {
 }
 
 addapp(require('./deploy.json')); // ksanapc
-
+/*
+  change package.json to "main": "../../cst/index.html",
+  and put in node-webkit exe folder
+*/
 var addshellscript=function() {
 	var script=[], P=platform;
 	if ('win32'==P) {

@@ -30,7 +30,12 @@ define(['./cjkutil','../base64','../kage/kage.amd'],function(cjkutil,Base64,kage
 			var title=glyphs[i].attributes["title"].value;
 			var src=glyphs[i].attributes["src"].value;
 			if (src) continue;//already has src data
-			var glyphid='u'+ cjkutil.getutf32ch(title).toString(16);
+			if (title.length>2) {
+				var glyphid=title;
+			} else {
+				var glyphid='u'+ cjkutil.getutf32ch(title).toString(16);
+			}
+			
 			fetchglyphwiki.apply(this,[glyphid,glyphs[i],
 				function(buhins,glyphid,glyph){
 			      var polygons=new that.sandbox.kage.Polygons();
@@ -42,7 +47,7 @@ define(['./cjkutil','../base64','../kage/kage.amd'],function(cjkutil,Base64,kage
 			      var color=$g.css('color');
 			      
 			      var svg=polygons.generateSVG(true,color);
-			      var widthbefore=$g.css('width');
+			      var widthbefore=parseInt($g.css('height'),10)-4;
 			      glyph.src="data:image/svg+xml;utf8,"+svg;
 			      $g.css("width",widthbefore);
 			      $g.css("height",widthbefore);
