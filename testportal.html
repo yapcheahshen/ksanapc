@@ -6,6 +6,16 @@
   <link rel="stylesheet" href="node_webkit/css/qunit.css">
 </head>
 <body>
+  <script>
+    var gowebsite=function(site) {
+      if (typeof process !='undefined' &&process.versions['node-webkit']) {
+        var gui=require('nw.gui');
+        if (gui) gui.Shell.openExternal(site);
+      }
+      else window.open(site,'_blank');
+    };
+  </script>
+  <a style="font-size:150%" href="javascript:gowebsite('http://127.0.0.1:9223')">OPEN DEBUGGING WINDOW</a>
   <div id="qunit"></div>
   <div id="qunit-fixture"></div>
   <script src="node_webkit/jslib/qunit.js"></script>
