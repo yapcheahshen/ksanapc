@@ -9,6 +9,7 @@ define(function() {
      setpath=function(){
       if (typeof process !='undefined' && document.location.href) {
         var indexpath=document.location.href.substring(8,document.location.href.length-11);
+        if (require('os').platform()!='win32') indexpath='/'+indexpath;
         process.chdir(indexpath) ;
         console.log('switch to '+indexpath)  
       }  
