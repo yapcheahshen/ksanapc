@@ -16,6 +16,9 @@ to run as server mode
 	npm install socket.io
 
 install node-webkit in node_webkit subfolder
+ https://github.com/rogerwang/node-webkit
+ win_ia32
+ osx_ia32
 
 ### Folder Structure
 #### node_webkit/jslib
